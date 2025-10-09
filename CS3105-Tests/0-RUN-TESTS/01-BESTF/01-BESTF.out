@@ -1,0 +1,12 @@
+Algorithm: BestF
+Prob Type: Default
+
+  0 1 2 3 4 5
+0 . S . . . .
+1 . . . O . .
+2 . . O O . .
+3 . O O O . G
+4 . . O O O .
+5 . . . . O .
+
+5.2

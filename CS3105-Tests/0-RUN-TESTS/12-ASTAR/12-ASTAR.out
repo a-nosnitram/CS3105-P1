@@ -1,0 +1,11 @@
+Algorithm: AStar
+Prob Type: Default
+
+  0 1 2 3 4
+0 S . O O O
+1 . O O O O
+2 O O G O O
+3 O O O O O
+4 O O O O O
+
+0.0
