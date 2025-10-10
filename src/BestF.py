@@ -49,7 +49,7 @@ class BestF():
                     print(len(explored))
                     print("".join([str(coord)
                           for coord in explored]).replace(" ", ""))
-                return float(current_node.cost)
+                return float(current_node.cost), len(explored)
             # get neighbors
             neighbors = self.state_space.get_neighbors(current_node)
             for neighbor in neighbors:
@@ -68,4 +68,4 @@ class BestF():
             step += 1
         if self.verbose:
             print(len(explored))
-        return None  # no path found :((((
+        return None, len(explored)  # no path found :((((

@@ -65,10 +65,12 @@ def runSearch(probType: str, algo: str, size: int, start: Coord, goal: Coord, ob
 
     if algo == "AStar":
         from AStar import AStar
-        return AStar(size, start, goal, obs, verbose).search()
+        res, _ = AStar(size, start, goal, obs, verbose).search()
+        return res
     elif algo == "BestF":
         from BestF import BestF
-        return BestF(size, start, goal, obs, verbose).search()
+        res, _ = BestF(size, start, goal, obs, verbose).search()
+        return res
 
 
 NOT_IMPLEMENTED = -1.0
@@ -84,7 +86,7 @@ if (len(sys.argv) < 2):
 
 # assume problem is correctly specified, set the problem components
 algo = sys.argv[1]
-probFile = "../CS3105-Tests/PROBS/"+sys.argv[2]+".txt"
+probFile = sys.argv[2]+".txt"
 scan = open(probFile)
 scanLines = scan.readlines()
 verbose = False
