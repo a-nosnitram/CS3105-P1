@@ -33,22 +33,26 @@ class Alt():
 
         explored = set()
 
-        return self.recursive_helper(start_node, float('inf'), explored)
+        result = self.recursive_helper(start_node, float('inf'), explored)
+
+        # If no path found and verbose, print explored count
+        if result[0] is None and self.verbose:
+            print(len(explored))
+
+        return result
 
     def recursive_helper(self, node, f_limit, explored):
         # first base case: goal reached
         if node.coord == self.state_space.goal:
             if self.verbose:
-                    print(len(explored))
-                    print("".join([str(coord)
-                          for coord in explored]).replace(" ", ""))
+                print(len(explored))
+                print("".join([str(coord)
+                      for coord in explored]).replace(" ", ""))
             return node.cost, len(explored)
 
         # if node in explored, continue
         coord_key = (node.coord.x, node.coord.y)
         if coord_key in explored:
-            if self.verbose:
-                    print(len(explored))
             return None, len(explored)
 
         # add node to explored
@@ -58,20 +62,20 @@ class Alt():
         neighbors = self.state_space.get_neighbors(node)
         if not neighbors:
             explored.remove(coord_key)
-            if self.verbose:
-                    print(len(explored))
             return None, len(explored)  # fail
 
         # find successors from neighbours
         successors = self.find_successors(neighbors, node)
 
         while successors:
+            if self.verbose:
+                print(str([str(n.coord) + "{:.1f}".format(n.total_cost)
+                      for n in successors]).replace("'", ""))
+
             f_value, best = successors[0].total_cost, successors[0]
 
             if f_value > f_limit:
                 explored.remove(coord_key)
-                if self.verbose:
-                    print(len(explored))
                 return None, len(explored) # fail
 
             second_best = successors[1].total_cost if len(successors) > 1 else float('inf')
@@ -80,19 +84,13 @@ class Alt():
 
             if result_cost is not None:
                 explored.remove(coord_key)
-                if self.verbose:
-                    print(len(explored))
-                    print("".join([str(coord)
-                          for coord in explored]).replace(" ", ""))
                 return result_cost, node_cnt
 
-            # if failed, mark as nfinite cost ad try next successor
+            # if failed, mark as infinite cost and try next successor
             successors[0].total_cost = float('inf')
             successors.sort(key=lambda x: x.total_cost)
 
         explored.remove(coord_key)
-        if self.verbose:
-            print(len(explored))
         return None, len(explored)
 
     def calculate_f_value(self, current_node, neighbor):
