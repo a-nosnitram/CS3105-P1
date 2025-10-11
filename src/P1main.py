@@ -71,6 +71,10 @@ def runSearch(probType: str, algo: str, size: int, start: Coord, goal: Coord, ob
         from BestF import BestF
         res, _ = BestF(size, start, goal, obs, verbose).search()
         return res
+    elif algo == "Alt":
+        from Alt import Alt
+        res, _ = Alt(size, start, goal, obs, verbose).search()
+        return res
 
 
 NOT_IMPLEMENTED = -1.0

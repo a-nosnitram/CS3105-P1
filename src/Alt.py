@@ -90,8 +90,9 @@ class Alt():
             successors[0].total_cost = float('inf')
             successors.sort(key=lambda x: x.total_cost)
 
-
         explored.remove(coord_key)
+        if self.verbose:
+            print(len(explored))
         return None, len(explored)
 
     def calculate_f_value(self, current_node, neighbor):
