@@ -10,15 +10,53 @@
 # - eval16-20: Shape rigidity variation (rectangles to organic blobs)
 # - eval21-25: Non-navigable pixel density variation (~1% to ~42%)
 
-
-# Add parent directory to path so we can import from src
-import sys
 import os
+import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
-import digitiser
 from coord import Coord
 import numpy as np
 import matplotlib.pyplot as plt
+import digitiser
+
+# Add parent directory to path so we can import from src
+
+# Using the same printMap function from P1main.py
+
+
+def printMap(start, goal, size, obs, add=None):
+    """Print visual representation of the grid (from P1main.py)
+    Legend: '.' = free, 'O' = obstacle, 'S' = start, 'G' = goal, '*' = path/explored
+    """
+    if add is None:
+        add = set()
+
+    block = set()
+    # collect the obstacles
+    for o in obs:
+        block.update(o.area)
+    print()
+    # print map
+    print('  ', end='')
+    for x in range(0, size):
+        print(x % 10, end=" ")
+    print()
+    for y in range(0, size):
+        print(y % 10, end=" ")
+        for x in range(0, size):
+            ch = '.'
+            test = Coord(x, y)
+            # decide what element to print on this cell
+            if (test in block):
+                ch = 'O'
+            if (test in add):
+                ch = '*'
+            if (test == start):
+                ch = 'S'
+            if (test == goal):
+                ch = 'G'
+            print(ch, end=' ')
+        print()
+    print()
 
 
 def load_problem(filename):
@@ -42,6 +80,7 @@ def load_problem(filename):
 
     return size, start, goal, obs
 
+
 def run_test_category(test_files, category_name, x_labels):
     """Run tests and collect results for a category"""
     results = {
@@ -52,25 +91,83 @@ def run_test_category(test_files, category_name, x_labels):
         'labels': x_labels
     }
 
-    for test_file in test_files:
-        print(f"Running {test_file}...")
+    print(f"\n{'='*80}")
+    print(f"  {category_name}")
+    print(f"{'='*80}")
+
+    for idx, test_file in enumerate(test_files):
+        test_name = test_file.split('/')[-1].replace('.txt', '')
+        print(
+            f"\n[Test {idx+1}/{len(test_files)}] {test_name} ({x_labels[idx]})")
+        print(f"{'-'*80}")
+
         size, start, goal, obs = load_problem(test_file)
+
+        # Print problem details
+        num_obstacles = len(obs)
+        total_pixels = size * size
+        obstacle_pixels = sum(len(o.area) for o in obs)
+        coverage = (obstacle_pixels / total_pixels) * 100
+
+        print(f"  Grid Size: {size}×{size} ({total_pixels} pixels)")
+        print(f"  Start: {start}, Goal: {goal}")
+        print(
+            f"  Obstacles: {num_obstacles}, Coverage: {obstacle_pixels}/{total_pixels} ({coverage:.1f}%)")
+
+        # print map
+        print(f"     Legend: S=Start, G=Goal, O=Obstacle, .=Free")
+        printMap(start, goal, size, obs)
 
         # Run A*
         from AStar import AStar
+        import time
+        start_time = time.time()
         astar = AStar(size, start, goal, obs, verbose=False)
         astar_cost, astar_nodes = astar.search()
+        astar_time = time.time() - start_time
+
         results['AStar_cost'].append(
             astar_cost if astar_cost is not None else 0)
         results['AStar_nodes'].append(astar_nodes)
 
+        if astar_cost is not None:
+            print(f"     Path Found :)")
+            print(f"     - Path Cost: {astar_cost:.2f}")
+            print(f"     - Nodes Explored: {astar_nodes}")
+            print(f"     - Time: {astar_time:.4f}s")
+        else:
+            print(f"     No Path Found :(")
+            print(f"     - Nodes Explored: {astar_nodes}")
+            print(f"     - Time: {astar_time:.4f}s")
+
         # Run BestF
         from BestF import BestF
+        start_time = time.time()
         bestf = BestF(size, start, goal, obs, verbose=False)
         bestf_cost, bestf_nodes = bestf.search()
+        bestf_time = time.time() - start_time
+
         results['BestF_cost'].append(
             bestf_cost if bestf_cost is not None else 0)
         results['BestF_nodes'].append(bestf_nodes)
+
+        if bestf_cost is not None:
+            print(f"     Path Found!")
+            print(f"     - Path Cost: {bestf_cost:.2f}")
+            print(f"     - Nodes Explored: {bestf_nodes}")
+            print(f"     - Time: {bestf_time:.4f}s")
+        else:
+            print(f"     No Path Found")
+            print(f"     - Nodes Explored: {bestf_nodes}")
+            print(f"     - Time: {bestf_time:.4f}s")
+
+        # Comparison
+        print(f"\nComparison:")
+        time_ratio = bestf_time / astar_time if astar_time > 0 else 1
+        if abs(time_ratio - 1) > 0.1:
+            faster = "A*" if astar_time < bestf_time else "BestF"
+            speedup = max(astar_time, bestf_time) / min(astar_time, bestf_time)
+            print(f"     - Speed: {faster} {speedup:.2f}x faster")
 
     return results
 
@@ -178,11 +275,42 @@ def main():
                     f"{output_dir}/05_obstacle_density.png")
     all_results.append(('Obstacle Density', results5))
 
-    # Create summary comparison
-    print("\n=== Creating Summary Comparisons ===")
-    create_summary_plot(output_dir, all_results)
+    total_tests = 0
+    astar_better_cost = 0
+    bestf_better_cost = 0
+    equal_cost = 0
+    astar_better_nodes = 0
+    bestf_better_nodes = 0
 
-    print("\n✓ All evaluations complete! Check the 'results' directory for plots.")
+    total_astar_cost = 0
+    total_bestf_cost = 0
+    total_astar_nodes = 0
+    total_bestf_nodes = 0
+
+    for cat_name, results in all_results:
+        for i in range(len(results['AStar_cost'])):
+            total_tests += 1
+            a_cost = results['AStar_cost'][i]
+            b_cost = results['BestF_cost'][i]
+            a_nodes = results['AStar_nodes'][i]
+            b_nodes = results['BestF_nodes'][i]
+
+            total_astar_cost += a_cost
+            total_bestf_cost += b_cost
+            total_astar_nodes += a_nodes
+            total_bestf_nodes += b_nodes
+
+            if abs(a_cost - b_cost) < 0.01:
+                equal_cost += 1
+            elif a_cost < b_cost:
+                astar_better_cost += 1
+            else:
+                bestf_better_cost += 1
+
+            if a_nodes < b_nodes:
+                astar_better_nodes += 1
+            else:
+                bestf_better_nodes += 1
 
 
 def create_summary_plot(output_dir, all_results):
@@ -214,7 +342,7 @@ def create_summary_plot(output_dir, all_results):
     fig = plt.figure(figsize=(18, 12))
     gs = fig.add_gridspec(2, 2, hspace=0.35, wspace=0.35)
     # fig.suptitle('Overall Performance Comparison: A* vs Best-First Search (All 25 Tests)',
-                #  fontsize=20, fontweight='bold', y=0.98)
+    #  fontsize=20, fontweight='bold', y=0.98)
 
     x = np.arange(len(categories))
     width = 0.35
@@ -257,7 +385,6 @@ def create_summary_plot(output_dir, all_results):
     ax3.set_title(f'Figure 5: Total Nodes Explored\nAcross All Tests\n(Total: {total_all_astar + total_all_bestf:,})',
                   fontsize=12, fontweight='bold')
 
-   
     plt.savefig(f"{output_dir}/00_overall_summary.png",
                 dpi=300, bbox_inches='tight')
     print(f"Saved plot: {output_dir}/00_overall_summary.png")
@@ -273,7 +400,6 @@ def create_all_tests_plot(output_dir, all_results):
     gs = fig.add_gridspec(2, 2, hspace=0.3, wspace=0.25)
     # fig.suptitle('Performance Over 25 Tests Across 5 Categories',
     #              fontsize=20, fontweight='bold', y=0.98)
-
 
     # Flatten all results and build descriptive labels
     all_labels = []
@@ -362,7 +488,7 @@ def create_all_tests_plot(output_dir, all_results):
     ax2.legend(fontsize=12)
     ax2.grid(True, alpha=0.3)
 
-    # Add coloured background to each section 
+    # Add coloured background to each section
     for i in range(len(category_boundaries)-1):
         start = category_boundaries[i]
         end = category_boundaries[i+1]-1

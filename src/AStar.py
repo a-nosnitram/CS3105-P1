@@ -1,7 +1,4 @@
 # A* Search Algorithm
-# starts with an initial node,
-# explores based on heuristic
-# h(n) = path length
 
 from queue import PriorityQueue
 from node import Node
