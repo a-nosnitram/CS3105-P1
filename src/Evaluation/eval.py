@@ -6,17 +6,17 @@
 # Test categories:
 # - eval1-5: Grid size variation (10, 15, 20, 25, 30)
 # - eval6-10: Obstacle count variation (0, 1, 3, 6, 12)
-# - eval11-15: Polygon vertex count variation (3, 4, 5, 6, 7-9)
+# - eval11-15: Polygon vertex count variation (3, 4, 5, 6, 7)
 # - eval16-20: Shape rigidity variation (rectangles to organic blobs)
 # - eval21-25: Non-navigable pixel density variation (~1% to ~42%)
 
 import os
 import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
-from coord import Coord
-import numpy as np
-import matplotlib.pyplot as plt
 import digitiser
+import matplotlib.pyplot as plt
+import numpy as np
+from coord import Coord
 
 # Add parent directory to path so we can import from src
 
@@ -86,8 +86,10 @@ def run_test_category(test_files, category_name, x_labels):
     results = {
         'AStar_cost': [],
         'BestF_cost': [],
+        'Alt_cost': [],
         'AStar_nodes': [],
         'BestF_nodes': [],
+        'Alt_nodes': [],
         'labels': x_labels
     }
 
@@ -118,7 +120,7 @@ def run_test_category(test_files, category_name, x_labels):
         print(f"     Legend: S=Start, G=Goal, O=Obstacle, .=Free")
         printMap(start, goal, size, obs)
 
-        # Run A*
+    # Run A*
         from AStar import AStar
         import time
         start_time = time.time()
@@ -140,7 +142,7 @@ def run_test_category(test_files, category_name, x_labels):
             print(f"     - Nodes Explored: {astar_nodes}")
             print(f"     - Time: {astar_time:.4f}s")
 
-        # Run BestF
+    # Run BestF
         from BestF import BestF
         start_time = time.time()
         bestf = BestF(size, start, goal, obs, verbose=False)
@@ -161,13 +163,42 @@ def run_test_category(test_files, category_name, x_labels):
             print(f"     - Nodes Explored: {bestf_nodes}")
             print(f"     - Time: {bestf_time:.4f}s")
 
+        # Run Alt (RBFS)
+        from Alt import Alt
+        start_time = time.time()
+        alt = Alt(size, start, goal, obs, verbose=False)
+        alt_cost, alt_nodes = alt.search()
+        alt_time = time.time() - start_time
+
+        results['Alt_cost'].append(
+            alt_cost if alt_cost is not None else 0)
+        results['Alt_nodes'].append(alt_nodes)
+
+        if alt_cost is not None:
+            print(f"     Path Found!")
+            print(f"     - Path Cost: {alt_cost:.2f} (Alt)")
+            print(f"     - Nodes Explored: {alt_nodes}")
+            print(f"     - Time: {alt_time:.4f}s")
+        else:
+            print(f"     No Path Found (Alt)")
+            print(f"     - Nodes Explored: {alt_nodes}")
+            print(f"     - Time: {alt_time:.4f}s")
+
         # Comparison
         print(f"\nComparison:")
-        time_ratio = bestf_time / astar_time if astar_time > 0 else 1
-        if abs(time_ratio - 1) > 0.1:
-            faster = "A*" if astar_time < bestf_time else "BestF"
-            speedup = max(astar_time, bestf_time) / min(astar_time, bestf_time)
-            print(f"     - Speed: {faster} {speedup:.2f}x faster")
+        times = {
+            'A*': astar_time,
+            'Best-First': bestf_time,
+            'Alt': alt_time
+        }
+        fastest_name = min(times, key=times.get)
+        slowest_time = max(times.values())
+        fastest_time = times[fastest_name]
+        if fastest_time > 0 and slowest_time / fastest_time > 1.1:
+            print(f"     - Fastest: {fastest_name} ({fastest_time:.4f}s)")
+            for name, t in times.items():
+                if name != fastest_name:
+                    print(f"       · {name}: {t/fastest_time:.2f}x slower")
 
     return results
 
@@ -181,14 +212,16 @@ def plot_comparison(results, category_name, x_label, filename):
                  fontsize=18, fontweight='bold', y=0.98)
 
     x = np.arange(len(results['labels']))
-    width = 0.35
+    width = 0.25
 
     # Plot 1: Path Cost - Bar Chart
     ax1 = fig.add_subplot(gs[0, 0])
-    ax1.bar(x - width/2, results['AStar_cost'],
+    ax1.bar(x - width, results['AStar_cost'],
             width, label='A*', color='#F28235', alpha=0.8)
-    ax1.bar(x + width/2, results['BestF_cost'], width,
+    ax1.bar(x, results['BestF_cost'], width,
             label='Best-First', color='#9ECF34', alpha=0.8)
+    ax1.bar(x + width, results['Alt_cost'], width,
+            label='Alt (RBFS)', color='#4BA3F2', alpha=0.8)
     ax1.set_xlabel(x_label, fontsize=11)
     ax1.set_ylabel('Path Cost', fontsize=11)
     ax1.set_title('Solution Quality - Bar Chart',
@@ -200,17 +233,20 @@ def plot_comparison(results, category_name, x_label, filename):
 
     # Plot 2: Nodes Explored - Bar Chart
     ax2 = fig.add_subplot(gs[0, 1])
-    ax2.bar(x - width/2, results['AStar_nodes'],
+    ax2.bar(x - width, results['AStar_nodes'],
             width, label='A*', color='#F28235', alpha=0.8)
-    ax2.bar(x + width/2, results['BestF_nodes'], width,
+    ax2.bar(x, results['BestF_nodes'], width,
             label='Best-First', color='#9ECF34', alpha=0.8)
+    ax2.bar(x + width, results['Alt_nodes'], width,
+            label='Alt (RBFS)', color='#4BA3F2', alpha=0.8)
     ax2.set_xlabel(x_label, fontsize=11)
-    ax2.set_ylabel('Nodes Explored', fontsize=11)
-    ax2.set_title('Efficiency - Bar Chart', fontsize=12, fontweight='bold')
+    ax2.set_ylabel('Nodes Explored (log scale)', fontsize=11)
+    ax2.set_title('Efficiency - Bar Chart (Log Scale)', fontsize=12, fontweight='bold')
     ax2.set_xticks(x)
     ax2.set_xticklabels(results['labels'], rotation=15, ha='right')
+    ax2.set_yscale('log')  # Use logarithmic scale for better visibility
     ax2.legend()
-    ax2.grid(axis='y', alpha=0.3)
+    ax2.grid(axis='y', alpha=0.3, which='both', linestyle=':')
 
     plt.savefig(filename, dpi=300, bbox_inches='tight')
     print(f"Saved plot: {filename}")
@@ -251,7 +287,7 @@ def main():
     # Category 3: Vertex Count Variation (eval11-15)
     print("\n=== Category 3: Polygon Vertex Count ===")
     test_files = [f"{eval_dir}/eval{i}_edge_num.txt" for i in range(11, 16)]
-    labels = ['3', '4', '5', '6', '7-9']
+    labels = ['3', '4', '5', '6', '7']
     results3 = run_test_category(test_files, "Polygon Vertex Count", labels)
     plot_comparison(results3, "Polygon Vertex Count",
                     "Vertices per Polygon", f"{output_dir}/03_vertex_count.png")
@@ -275,42 +311,8 @@ def main():
                     f"{output_dir}/05_obstacle_density.png")
     all_results.append(('Obstacle Density', results5))
 
-    total_tests = 0
-    astar_better_cost = 0
-    bestf_better_cost = 0
-    equal_cost = 0
-    astar_better_nodes = 0
-    bestf_better_nodes = 0
-
-    total_astar_cost = 0
-    total_bestf_cost = 0
-    total_astar_nodes = 0
-    total_bestf_nodes = 0
-
-    for cat_name, results in all_results:
-        for i in range(len(results['AStar_cost'])):
-            total_tests += 1
-            a_cost = results['AStar_cost'][i]
-            b_cost = results['BestF_cost'][i]
-            a_nodes = results['AStar_nodes'][i]
-            b_nodes = results['BestF_nodes'][i]
-
-            total_astar_cost += a_cost
-            total_bestf_cost += b_cost
-            total_astar_nodes += a_nodes
-            total_bestf_nodes += b_nodes
-
-            if abs(a_cost - b_cost) < 0.01:
-                equal_cost += 1
-            elif a_cost < b_cost:
-                astar_better_cost += 1
-            else:
-                bestf_better_cost += 1
-
-            if a_nodes < b_nodes:
-                astar_better_nodes += 1
-            else:
-                bestf_better_nodes += 1
+    # Generate overall summary plots as well
+    create_summary_plot(output_dir, all_results)
 
 
 def create_summary_plot(output_dir, all_results):
@@ -320,23 +322,46 @@ def create_summary_plot(output_dir, all_results):
     categories = []
     avg_astar_cost = []
     avg_bestf_cost = []
+    avg_alt_cost = []
+    std_astar_cost = []
+    std_bestf_cost = []
+    std_alt_cost = []
     avg_astar_nodes = []
     avg_bestf_nodes = []
+    avg_alt_nodes = []
+    std_astar_nodes = []
+    std_bestf_nodes = []
+    std_alt_nodes = []
     total_astar_cost = []
     total_bestf_cost = []
+    total_alt_cost = []
     total_astar_nodes = []
     total_bestf_nodes = []
+    total_alt_nodes = []
 
     for cat_name, results in all_results:
         categories.append(cat_name)
+        # Means
         avg_astar_cost.append(np.mean(results['AStar_cost']))
         avg_bestf_cost.append(np.mean(results['BestF_cost']))
+        avg_alt_cost.append(np.mean(results['Alt_cost']))
         avg_astar_nodes.append(np.mean(results['AStar_nodes']))
         avg_bestf_nodes.append(np.mean(results['BestF_nodes']))
+        avg_alt_nodes.append(np.mean(results['Alt_nodes']))
+        # Standard deviations (error bars)
+        std_astar_cost.append(np.std(results['AStar_cost']))
+        std_bestf_cost.append(np.std(results['BestF_cost']))
+        std_alt_cost.append(np.std(results['Alt_cost']))
+        std_astar_nodes.append(np.std(results['AStar_nodes']))
+        std_bestf_nodes.append(np.std(results['BestF_nodes']))
+        std_alt_nodes.append(np.std(results['Alt_nodes']))
+        # Totals
         total_astar_cost.append(np.sum(results['AStar_cost']))
         total_bestf_cost.append(np.sum(results['BestF_cost']))
+        total_alt_cost.append(np.sum(results['Alt_cost']))
         total_astar_nodes.append(np.sum(results['AStar_nodes']))
         total_bestf_nodes.append(np.sum(results['BestF_nodes']))
+        total_alt_nodes.append(np.sum(results['Alt_nodes']))
 
     # Create overall comparison figure
     fig = plt.figure(figsize=(18, 12))
@@ -349,10 +374,15 @@ def create_summary_plot(output_dir, all_results):
 
     # Plot 1: Average Path Cost by Category
     ax1 = fig.add_subplot(gs[0, 0])
-    ax1.bar(x - width/2, avg_astar_cost, width,
-            label='A*', color='#F28235', alpha=0.8)
-    ax1.bar(x + width/2, avg_bestf_cost, width,
-            label='Best-First', color='#9ECF34', alpha=0.8)
+    ax1.bar(x - width, avg_astar_cost, width,
+        yerr=std_astar_cost, capsize=5,
+        label='A*', color='#F28235', alpha=0.8, ecolor='#9a9a9a')
+    ax1.bar(x, avg_bestf_cost, width,
+        yerr=std_bestf_cost, capsize=5,
+        label='Best-First', color='#9ECF34', alpha=0.8, ecolor='#9a9a9a')
+    ax1.bar(x + width, avg_alt_cost, width,
+        yerr=std_alt_cost, capsize=5,
+        label='Alt (RBFS)', color='#4BA3F2', alpha=0.8, ecolor='#9a9a9a')
     ax1.set_ylabel('Average Path Cost', fontsize=11)
     ax1.set_title('Figure 3: Average Solution Quality by Category',
                   fontsize=12, fontweight='bold')
@@ -363,27 +393,35 @@ def create_summary_plot(output_dir, all_results):
 
     # Plot 2: Average Nodes Explored by Category
     ax2 = fig.add_subplot(gs[0, 1])
-    ax2.bar(x - width/2, avg_astar_nodes, width,
-            label='A*', color='#F28235', alpha=0.8)
-    ax2.bar(x + width/2, avg_bestf_nodes, width,
-            label='Best-First', color='#9ECF34', alpha=0.8)
-    ax2.set_ylabel('Average Nodes Explored', fontsize=11)
-    ax2.set_title('Figure 4: Average Efficiency by Category',
+    ax2.bar(x - width, avg_astar_nodes, width,
+        yerr=std_astar_nodes, capsize=5,
+        label='A*', color='#F28235', alpha=0.8, ecolor='#9a9a9a')
+    ax2.bar(x, avg_bestf_nodes, width,
+        yerr=std_bestf_nodes, capsize=5,
+        label='Best-First', color='#9ECF34', alpha=0.8, ecolor='#9a9a9a')
+    ax2.bar(x + width, avg_alt_nodes, width,
+        yerr=std_alt_nodes, capsize=5,
+        label='Alt (RBFS)', color='#4BA3F2', alpha=0.8, ecolor='#9a9a9a')
+    ax2.set_ylabel('Average Nodes Explored (log scale)', fontsize=11)
+    ax2.set_title('Figure 4: Average Efficiency by Category (Log Scale)',
                   fontsize=12, fontweight='bold')
     ax2.set_xticks(x)
     ax2.set_xticklabels(categories, rotation=20, ha='right', fontsize=9)
+    ax2.set_yscale('log')  # Use logarithmic scale for better visibility
     ax2.legend()
-    ax2.grid(axis='y', alpha=0.3)
+    ax2.grid(axis='y', alpha=0.3, which='both', linestyle=':')
 
     # Plot 3: Pie Chart - Total Nodes Explored
-    ax3 = fig.add_subplot(gs[1, :])
-    total_all_astar = sum(total_astar_nodes)
-    total_all_bestf = sum(total_bestf_nodes)
-    ax3.pie([total_all_astar, total_all_bestf], labels=['A*', 'Best-First'],
-            colors=['#F28235', '#9ECF34'], autopct='%1.1f%%', startangle=90,
-            textprops={'fontsize': 12, 'fontweight': 'bold'})
-    ax3.set_title(f'Figure 5: Total Nodes Explored\nAcross All Tests\n(Total: {total_all_astar + total_all_bestf:,})',
-                  fontsize=12, fontweight='bold')
+    # ax3 = fig.add_subplot(gs[1, :])
+    # total_all_astar = sum(total_astar_nodes)
+    # total_all_bestf = sum(total_bestf_nodes)
+    # total_all_alt = sum(total_alt_nodes)
+    # ax3.pie([total_all_astar, total_all_bestf, total_all_alt], labels=['A*', 'Best-First', 'Alt (RBFS)'],
+    #         colors=['#F28235', '#9ECF34', '#4BA3F2'], autopct='%1.1f%%', startangle=90,
+    #         textprops={'fontsize': 12, 'fontweight': 'bold'})
+    # ax3.set_title(
+    #     f'Figure 5: Total Nodes Explored\nAcross All Tests\n(Total: {total_all_astar + total_all_bestf + total_all_alt:,})',
+    #     fontsize=12, fontweight='bold')
 
     plt.savefig(f"{output_dir}/00_overall_summary.png",
                 dpi=300, bbox_inches='tight')
@@ -405,8 +443,10 @@ def create_all_tests_plot(output_dir, all_results):
     all_labels = []
     all_astar_cost = []
     all_bestf_cost = []
+    all_alt_cost = []
     all_astar_nodes = []
     all_bestf_nodes = []
+    all_alt_nodes = []
     category_boundaries = [0]
 
     for cat_name, results in all_results:
@@ -427,18 +467,26 @@ def create_all_tests_plot(output_dir, all_results):
             all_labels.append(test_label)
             all_astar_cost.append(results['AStar_cost'][i])
             all_bestf_cost.append(results['BestF_cost'][i])
+            all_alt_cost.append(results['Alt_cost'][i])
             all_astar_nodes.append(results['AStar_nodes'][i])
             all_bestf_nodes.append(results['BestF_nodes'][i])
+            all_alt_nodes.append(results['Alt_nodes'][i])
         category_boundaries.append(len(all_labels))
 
     x = np.arange(len(all_labels))
 
     # Plot 1: All Path Costs
     ax1 = fig.add_subplot(gs[0, :])
-    ax1.plot(x, all_astar_cost, 'o-', label='A*',
-             color='#F28235', linewidth=2, markersize=6, alpha=0.8)
+    # Plot Best-First first (background)
     ax1.plot(x, all_bestf_cost, 's-', label='Best-First',
-             color='#9ECF34', linewidth=2, markersize=6, alpha=0.8)
+             color='#9ECF34', linewidth=2.5, markersize=7, alpha=0.85)
+    # Plot A* with hollow markers
+    ax1.plot(x, all_astar_cost, 'o-', label='A*',
+             color='#F28235', linewidth=2.5, markersize=9, alpha=0.9,
+             markerfacecolor='none', markeredgewidth=2)
+    # Plot Alt with different marker
+    ax1.plot(x, all_alt_cost, 'D-', label='Alt (RBFS)',
+             color='#4BA3F2', linewidth=2, markersize=6, alpha=0.9)
 
     # Add vertical lines to separate categories
     for boundary in category_boundaries[1:-1]:
@@ -467,6 +515,8 @@ def create_all_tests_plot(output_dir, all_results):
              color='#F28235', linewidth=2, markersize=6, alpha=0.8)
     ax2.plot(x, all_bestf_nodes, 's-', label='Best-First',
              color='#9ECF34', linewidth=2, markersize=6, alpha=0.8)
+    ax2.plot(x, all_alt_nodes, '^-', label='Alt (RBFS)',
+             color='#4BA3F2', linewidth=2, markersize=6, alpha=0.8)
 
     # Add vertical lines to separate categories
     for boundary in category_boundaries[1:-1]:
@@ -480,13 +530,14 @@ def create_all_tests_plot(output_dir, all_results):
                  bbox=dict(boxstyle='round', facecolor='lightblue', alpha=0.3))
 
     # ax2.set_xlabel('Test', fontsize=13)
-    ax2.set_ylabel('Nodes Explored', fontsize=13)
-    ax2.set_title('Figure 2: Nodes Explored Across All 25 Tests',
+    ax2.set_ylabel('Nodes Explored (log scale)', fontsize=13)
+    ax2.set_title('Figure 2: Nodes Explored Across All 25 Tests (Log Scale)',
                   fontsize=14, fontweight='bold')
     ax2.set_xticks(x)
     ax2.set_xticklabels(all_labels, fontsize=8, rotation=45, ha='right')
+    ax2.set_yscale('log')  # Use logarithmic scale for better visibility
     ax2.legend(fontsize=12)
-    ax2.grid(True, alpha=0.3)
+    ax2.grid(True, alpha=0.3, which='both', linestyle=':')
 
     # Add coloured background to each section
     for i in range(len(category_boundaries)-1):

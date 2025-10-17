@@ -31,72 +31,63 @@ class Alt():
         self.frontier.put(
             (start_node.total_cost, next(self._counter), start_node))
 
-        explored = set()
+        result_cost, nodes_cnt, _ = self.recursive_helper(start_node, float('inf'), 0)
 
-        result = self.recursive_helper(start_node, float('inf'), explored)
+        # If no path found and verbose, print node count
+        if result_cost is None and self.verbose:
+            print(nodes_cnt)
 
-        # If no path found and verbose, print explored count
-        if result[0] is None and self.verbose:
-            print(len(explored))
+        return result_cost, nodes_cnt
 
-        return result
-
-    def recursive_helper(self, node, f_limit, explored):
+    def recursive_helper(self, node, f_limit, nodes_explored):
         # first base case: goal reached
         if node.coord == self.state_space.goal:
             if self.verbose:
-                print(len(explored))
-                print("".join([str(coord)
-                      for coord in explored]).replace(" ", ""))
-            return node.cost, len(explored)
+                print(nodes_explored)
+            return node.cost, nodes_explored, node.total_cost
 
-        # if node in explored, continue
-        coord_key = (node.coord.x, node.coord.y)
-        if coord_key in explored:
-            return None, len(explored)
-
-        # add node to explored
-        explored.add(coord_key)
+        nodes_explored += 1
 
         # Get neighbors
         neighbors = self.state_space.get_neighbors(node)
         if not neighbors:
-            explored.remove(coord_key)
-            return None, len(explored)  # fail
+            return None, nodes_explored, float('inf')  # fail, return infinite f-value
 
-        # find successors from neighbours
+        # find successors from neighbours (with cycle detection)
         successors = self.find_successors(neighbors, node)
 
-        while successors:
+        if not successors:
+            return None, nodes_explored, float('inf')
+
+        while True:
             if self.verbose:
                 print(str([str(n.coord) + "{:.1f}".format(n.total_cost)
                       for n in successors]).replace("'", ""))
 
-            f_value, best = successors[0].total_cost, successors[0]
+            # Get best and second-best f-values
+            best = successors[0]
+            f_best = best.total_cost
 
             # if best successor has infinite cost, no path exists
-            if f_value == float('inf'):
-                explored.remove(coord_key)
-                return None, len(explored)
+            if f_best == float('inf'):
+                return None, nodes_explored, float('inf')
 
-            if f_value > f_limit:
-                explored.remove(coord_key)
-                return None, len(explored) # fail
+            if f_best > f_limit:
+                return None, nodes_explored, f_best  # return the best f-value we found
 
-            second_best = successors[1].total_cost if len(successors) > 1 else float('inf')
+            # Get second-best f-value
+            f_second = successors[1].total_cost if len(successors) > 1 else float('inf')
 
-            result_cost, node_cnt = self.recursive_helper(best, min(f_limit, second_best), explored)
+            # Recurse with new f-limit = min(f_limit, f_second)
+            result_cost, node_cnt, new_f = self.recursive_helper(best, min(f_limit, f_second), nodes_explored)
 
             if result_cost is not None:
-                explored.remove(coord_key)
-                return result_cost, node_cnt
+                return result_cost, node_cnt, new_f
 
-            # if failed, mark as infinite cost and try next successor
-            successors[0].total_cost = float('inf')
+            # Update the f-value of the failed path and re-sort
+            best.total_cost = max(new_f, f_best)  # Use max to ensure monotonicity
             successors.sort(key=lambda x: x.total_cost)
-
-        explored.remove(coord_key)
-        return None, len(explored)
+            nodes_explored = node_cnt
 
     def calculate_f_value(self, current_node, neighbor):
         line = DrawLine(current_node.coord, neighbor.coord)
@@ -111,8 +102,19 @@ class Alt():
         for neighbor in neighbors:
             neighbor_node = Node(neighbor, node)
             self.calculate_f_value(node, neighbor_node)
-            successors.append(neighbor_node)
+            # Only add if not in current path (check parent chain for cycles)
+            if not self.in_path(neighbor, node):
+                successors.append(neighbor_node)
 
         # total_cost = f_value
         successors.sort(key=lambda x: x.total_cost)
         return successors
+
+    def in_path(self, coord, node):
+        """Check if coord is in the path from start to current node"""
+        current = node
+        while current is not None:
+            if current.coord == coord:
+                return True
+            current = current.parent
+        return False

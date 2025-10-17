@@ -60,7 +60,13 @@ class BestF():
                 coord_key = (neighbor_node.coord.x, neighbor_node.coord.y)
                 if coord_key not in explored:
                     # push (cost, tie-breaker, node) so heap never compares Node
-                    if neighbor_node not in [n[2] for n in self.frontier.queue]:
+                    # if the node is already in the frontier with higher cost, skip
+                    in_frontier = False
+                    for item in self.frontier.queue:
+                        if item[2].coord == neighbor_node.coord and item[2].total_cost <= neighbor_node.total_cost:
+                            in_frontier = True
+                            break
+                    if not in_frontier:
                         self.frontier.put(
                             (neighbor_node.total_cost, next(self._counter), neighbor_node))
             step += 1
