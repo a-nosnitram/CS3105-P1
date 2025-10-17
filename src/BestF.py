@@ -60,9 +60,10 @@ class BestF():
                 coord_key = (neighbor_node.coord.x, neighbor_node.coord.y)
                 if coord_key not in explored:
                     # push (cost, tie-breaker, node) so heap never compares Node
-                    self.frontier.put(
-                        (neighbor_node.total_cost, next(self._counter), neighbor_node))
+                    if neighbor_node not in [n[2] for n in self.frontier.queue]:
+                        self.frontier.put(
+                            (neighbor_node.total_cost, next(self._counter), neighbor_node))
             step += 1
         if self.verbose:
             print(len(explored))
-        return None, len(explored)  # no path found :((((
+        return None, len(explored)  # no path found :(

@@ -77,6 +77,16 @@ class StateSpace:
                         blocked = True
                         break
 
+                # edge case: when the plygon is small (perimeter == area)
+                # lines that pass through the polygon edges need to be blocked too
+                # we need to check if the line intersects a polygon edge that does not contain either endpoint
+                # also, t might intersect the polygon in between coords
+                for e in polygon.edges:
+                    # exclude line edges that contain vertices with e.line[1] and e.line[len(e.line)-2]
+                    if self.two_segments_intersect(node.coord, target_coord, e.line[0], e.line[len(e.line) - 1]):
+                        blocked = True
+                        break
+
                 # check if line intersects polygon area (interior or perimeter)
                 for point in line.line:
                     # skip vertices
@@ -87,6 +97,8 @@ class StateSpace:
                         blocked = True
                         break
 
+ 
+
                 if blocked:
                     break
 
@@ -94,3 +106,29 @@ class StateSpace:
                 neighbors.append(target_coord)
 
         return neighbors
+    
+    # check if two segments intersect, excluding endpoints
+    def two_segments_intersect(self, p1, p2, q1, q2):
+        # Check if line segments p1p2 and q1q2 intersect
+        def orientation(p, q, r):
+            val = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y)
+            if val == 0:
+                return 0  # collinear
+            return 1 if val > 0 else 2  # clock or counterclock wise
+ 
+        o1 = orientation(p1, p2, q1)
+        o2 = orientation(p1, p2, q2)
+        o3 = orientation(q1, q2, p1)
+        o4 = orientation(q1, q2, p2)
+
+        if o1 == 0 or o2 == 0 or o3 == 0 or o4 == 0:
+            # This covers collinear overlap and touching at endpoints; return False per requirement.
+            return False
+
+        # General case
+        if o1 != o2 and o3 != o4:
+            return True
+
+        return False  
+
+

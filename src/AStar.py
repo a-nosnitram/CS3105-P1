@@ -51,17 +51,19 @@ class AStar():
             neighbors = self.state_space.get_neighbors(current_node)
             for neighbor in neighbors:
                 neighbor_node = Node(neighbor, current_node)
-                # Calculate cost: 1.0 for adjacent, √2 for diagonal
+                
                 line = DrawLine(current_node.coord, neighbor)
                 distance = line.length
                 neighbor_node.cost = current_node.cost + distance
                 neighbor_node.her = self.heuristic(neighbor)
                 neighbor_node.total_cost = neighbor_node.cost + neighbor_node.her
+                
                 coord_key = (neighbor_node.coord.x, neighbor_node.coord.y)
                 if coord_key not in explored:
                     # push (cost, tie-breaker, node) so heap never compares Node
-                    self.frontier.put(
-                        (neighbor_node.total_cost, next(self._counter), neighbor_node))
+                    if neighbor_node, neighbor_node.cost not in [n for _,n,c in self.frontier.queue]:
+                        self.frontier.put(
+                            (neighbor_node.total_cost, next(self._counter), neighbor_node))
             step += 1
         if self.verbose:
             print(len(explored))

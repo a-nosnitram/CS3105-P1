@@ -1,0 +1,2231 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    table.diff {
+        table-layout: inherit;
+        font-family:Courier;
+        border: medium;
+        # width: 95vw;
+        word-wrap: break-word;
+    }
+    .code {font-family:Courier; border:medium; width: 2000px}
+    .diff_header {background-color:#3a3a3a; color: #ffffff} /* almost black, white */
+    td.diff_header {text-align: center;}
+    .diff_next {background-color:#ff00dd; display: none} /* violet */
+    .diff_add {background-color:#24906c} /*eastern blue*/
+    .GREEN {background-color:#2aa77d} /* green */
+    .YELLOW, .diff_chg {background-color:#ffff77; color:#000} /* yellow, black */
+    .AMBER {background-color:#ffa54f} /* amber */
+    .RED, .diff_sub {background-color:#e44c4b} /* red */
+    .WARN {background-color:#7d7d7d; color: #ffffff} /* gray */
+    :target { background: yellow;  color:#000}
+
+    /* Make the whole thing have a dark background and light text*/
+    body {background-color: #292929; color: #ffffff; width: 100%;}
+    /* For test descriptions (PASS build-faro) and stacscheck info */
+    .test_desc {font-size: 22px; font-family: Arial; font-weight: normal;}
+    /* For any normal code */
+    .infocode {font-size: 14px; font-family: Courier; margin-left: 20px}
+    /* For compared code */
+    .compcode {font-size: 14px; font-family: Courier; margin-left: 20px}
+    h2 {font-size: 18px; font-family: Arial; font-weight: bold; margin-left: 20px}
+    /* Collapsible testing */
+    .collapsible {display: none;}
+
+    table { table-layout: fixed;}
+    # .diff {
+    #     display: table;
+    #     table-layout: inherit;
+    #     word-wrap: break-word;
+    #     background-color: coral;
+    # }
+
+    # .test-content {
+    #     # display: table-cell;
+    #     width: 100%;
+    #     colspan: 3;
+    # }
+
+    td {white-space: normal;}
+
+    # testtable {width: 100%;}
+
+    .buttonholder {width: 2%;}
+
+</style>
+<head>
+    <title>CS3105 P1 Practical - &lt;unknown&gt; </title>
+    <h1 class="test_desc">32 out of 32 tests passed</h1>
+    <br>
+</head>
+<body>
+    <h1 class="test_desc"> STACSCHECK INFO </h1>
+    <div class="infocode">
+        - Looking for submission in a directory called &#39;src&#39;: 
+        <br/>
+    
+        found in current directory
+
+        <br/>
+    
+    <br>
+    </div>
+    <table id="testtable">
+    
+        <tr id="test1" 
+         bgcolor="#2aa77d" 
+        >
+        <td class="buttonholder">
+        <button class="collapsebutton" onclick="docollapse('content-1')">
+        expand
+        </button>
+        </td>
+        <td class="test_desc">
+         PASS 
+        </td>
+        <td class="test_desc" id="build-all"> build-all </td>
+        </tr>
+        <div class="test-content" >
+        <tr id="content-1" class="collapsible">
+        <td colspan="5" class="code">
+
+
+        
+            <h2> Compiler info </h2>
+            <div display="inline" class="infocode">
+            
+            </div>
+            <div class="infocode">
+            
+            </div>
+
+        
+        <br> <br>
+        </td>
+        </tr>
+        </div>
+    
+        <tr id="test2" 
+         bgcolor="#2aa77d" 
+        >
+        <td class="buttonholder">
+        <button class="collapsebutton" onclick="docollapse('content-2')">
+        expand
+        </button>
+        </td>
+        <td class="test_desc">
+         PASS 
+        </td>
+        <td class="test_desc" id="0-RUN-TESTS/00-BESTF/prog-run-00-BESTF.out"> 0-RUN-TESTS/00-BESTF/prog-run-00-BESTF.out </td>
+        </tr>
+        <div class="test-content" >
+        <tr id="content-2" class="collapsible">
+        <td colspan="5" class="code">
+
+
+        
+            
+            <h2> Output </h2>
+
+            
+
+            <div class="compcode">
+            
+                
+    <table class="diff" id="difflib_chg_to0__top"
+           cellspacing="0" cellpadding="0" rules="groups" >
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <thead><tr><th class="diff_next"><br /></th><th colspan="2" class="diff_header">Submission</th><th class="diff_next"><br /></th><th colspan="2" class="diff_header">Reference</th></tr></thead>
+        <tbody>
+            <tr><td class="diff_next"><a href="#difflib_chg_to0__top">t</a></td><td class="diff_header" id="from0_1">1</td><td nowrap="nowrap">Algorithm:&nbsp;BestF</td><td class="diff_next"><a href="#difflib_chg_to0__top">t</a></td><td class="diff_header" id="to0_1">1</td><td nowrap="nowrap">Algorithm:&nbsp;BestF</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from0_2">2</td><td nowrap="nowrap">Prob&nbsp;Type:&nbsp;Default</td><td class="diff_next"></td><td class="diff_header" id="to0_2">2</td><td nowrap="nowrap">Prob&nbsp;Type:&nbsp;Default</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from0_3">3</td><td nowrap="nowrap">&nbsp;&nbsp;0&nbsp;1&nbsp;2&nbsp;3</td><td class="diff_next"></td><td class="diff_header" id="to0_3">3</td><td nowrap="nowrap">&nbsp;&nbsp;0&nbsp;1&nbsp;2&nbsp;3</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from0_4">4</td><td nowrap="nowrap">0&nbsp;S&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to0_4">4</td><td nowrap="nowrap">0&nbsp;S&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from0_5">5</td><td nowrap="nowrap">1&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to0_5">5</td><td nowrap="nowrap">1&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from0_6">6</td><td nowrap="nowrap">2&nbsp;.&nbsp;.&nbsp;G&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to0_6">6</td><td nowrap="nowrap">2&nbsp;.&nbsp;.&nbsp;G&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from0_7">7</td><td nowrap="nowrap">3&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to0_7">7</td><td nowrap="nowrap">3&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from0_8">8</td><td nowrap="nowrap">2.8</td><td class="diff_next"></td><td class="diff_header" id="to0_8">8</td><td nowrap="nowrap">2.8</td></tr>
+        </tbody>
+    </table>
+            </div>
+            
+
+        
+        <br> <br>
+        </td>
+        </tr>
+        </div>
+    
+        <tr id="test3" 
+         bgcolor="#2aa77d" 
+        >
+        <td class="buttonholder">
+        <button class="collapsebutton" onclick="docollapse('content-3')">
+        expand
+        </button>
+        </td>
+        <td class="test_desc">
+         PASS 
+        </td>
+        <td class="test_desc" id="0-RUN-TESTS/01-BESTF/prog-run-01-BESTF.out"> 0-RUN-TESTS/01-BESTF/prog-run-01-BESTF.out </td>
+        </tr>
+        <div class="test-content" >
+        <tr id="content-3" class="collapsible">
+        <td colspan="5" class="code">
+
+
+        
+            
+            <h2> Output </h2>
+
+            
+
+            <div class="compcode">
+            
+                
+    <table class="diff" id="difflib_chg_to1__top"
+           cellspacing="0" cellpadding="0" rules="groups" >
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <thead><tr><th class="diff_next"><br /></th><th colspan="2" class="diff_header">Submission</th><th class="diff_next"><br /></th><th colspan="2" class="diff_header">Reference</th></tr></thead>
+        <tbody>
+            <tr><td class="diff_next"><a href="#difflib_chg_to1__top">t</a></td><td class="diff_header" id="from1_1">1</td><td nowrap="nowrap">Algorithm:&nbsp;BestF</td><td class="diff_next"><a href="#difflib_chg_to1__top">t</a></td><td class="diff_header" id="to1_1">1</td><td nowrap="nowrap">Algorithm:&nbsp;BestF</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from1_2">2</td><td nowrap="nowrap">Prob&nbsp;Type:&nbsp;Default</td><td class="diff_next"></td><td class="diff_header" id="to1_2">2</td><td nowrap="nowrap">Prob&nbsp;Type:&nbsp;Default</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from1_3">3</td><td nowrap="nowrap">&nbsp;&nbsp;0&nbsp;1&nbsp;2&nbsp;3&nbsp;4&nbsp;5</td><td class="diff_next"></td><td class="diff_header" id="to1_3">3</td><td nowrap="nowrap">&nbsp;&nbsp;0&nbsp;1&nbsp;2&nbsp;3&nbsp;4&nbsp;5</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from1_4">4</td><td nowrap="nowrap">0&nbsp;.&nbsp;S&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to1_4">4</td><td nowrap="nowrap">0&nbsp;.&nbsp;S&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from1_5">5</td><td nowrap="nowrap">1&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to1_5">5</td><td nowrap="nowrap">1&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from1_6">6</td><td nowrap="nowrap">2&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to1_6">6</td><td nowrap="nowrap">2&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from1_7">7</td><td nowrap="nowrap">3&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;G</td><td class="diff_next"></td><td class="diff_header" id="to1_7">7</td><td nowrap="nowrap">3&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;G</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from1_8">8</td><td nowrap="nowrap">4&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to1_8">8</td><td nowrap="nowrap">4&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from1_9">9</td><td nowrap="nowrap">5&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to1_9">9</td><td nowrap="nowrap">5&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from1_10">10</td><td nowrap="nowrap">5.2</td><td class="diff_next"></td><td class="diff_header" id="to1_10">10</td><td nowrap="nowrap">5.2</td></tr>
+        </tbody>
+    </table>
+            </div>
+            
+
+        
+        <br> <br>
+        </td>
+        </tr>
+        </div>
+    
+        <tr id="test4" 
+         bgcolor="#2aa77d" 
+        >
+        <td class="buttonholder">
+        <button class="collapsebutton" onclick="docollapse('content-4')">
+        expand
+        </button>
+        </td>
+        <td class="test_desc">
+         PASS 
+        </td>
+        <td class="test_desc" id="0-RUN-TESTS/02-BESTF/prog-run-02-BESTF.out"> 0-RUN-TESTS/02-BESTF/prog-run-02-BESTF.out </td>
+        </tr>
+        <div class="test-content" >
+        <tr id="content-4" class="collapsible">
+        <td colspan="5" class="code">
+
+
+        
+            
+            <h2> Output </h2>
+
+            
+
+            <div class="compcode">
+            
+                
+    <table class="diff" id="difflib_chg_to2__top"
+           cellspacing="0" cellpadding="0" rules="groups" >
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <thead><tr><th class="diff_next"><br /></th><th colspan="2" class="diff_header">Submission</th><th class="diff_next"><br /></th><th colspan="2" class="diff_header">Reference</th></tr></thead>
+        <tbody>
+            <tr><td class="diff_next"><a href="#difflib_chg_to2__top">t</a></td><td class="diff_header" id="from2_1">1</td><td nowrap="nowrap">Algorithm:&nbsp;BestF</td><td class="diff_next"><a href="#difflib_chg_to2__top">t</a></td><td class="diff_header" id="to2_1">1</td><td nowrap="nowrap">Algorithm:&nbsp;BestF</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from2_2">2</td><td nowrap="nowrap">Prob&nbsp;Type:&nbsp;Default</td><td class="diff_next"></td><td class="diff_header" id="to2_2">2</td><td nowrap="nowrap">Prob&nbsp;Type:&nbsp;Default</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from2_3">3</td><td nowrap="nowrap">&nbsp;&nbsp;0&nbsp;1&nbsp;2&nbsp;3&nbsp;4</td><td class="diff_next"></td><td class="diff_header" id="to2_3">3</td><td nowrap="nowrap">&nbsp;&nbsp;0&nbsp;1&nbsp;2&nbsp;3&nbsp;4</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from2_4">4</td><td nowrap="nowrap">0&nbsp;S&nbsp;.&nbsp;O&nbsp;O&nbsp;O</td><td class="diff_next"></td><td class="diff_header" id="to2_4">4</td><td nowrap="nowrap">0&nbsp;S&nbsp;.&nbsp;O&nbsp;O&nbsp;O</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from2_5">5</td><td nowrap="nowrap">1&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O</td><td class="diff_next"></td><td class="diff_header" id="to2_5">5</td><td nowrap="nowrap">1&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from2_6">6</td><td nowrap="nowrap">2&nbsp;O&nbsp;O&nbsp;G&nbsp;O&nbsp;O</td><td class="diff_next"></td><td class="diff_header" id="to2_6">6</td><td nowrap="nowrap">2&nbsp;O&nbsp;O&nbsp;G&nbsp;O&nbsp;O</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from2_7">7</td><td nowrap="nowrap">3&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O</td><td class="diff_next"></td><td class="diff_header" id="to2_7">7</td><td nowrap="nowrap">3&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from2_8">8</td><td nowrap="nowrap">4&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O</td><td class="diff_next"></td><td class="diff_header" id="to2_8">8</td><td nowrap="nowrap">4&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from2_9">9</td><td nowrap="nowrap">0.0</td><td class="diff_next"></td><td class="diff_header" id="to2_9">9</td><td nowrap="nowrap">0.0</td></tr>
+        </tbody>
+    </table>
+            </div>
+            
+
+        
+        <br> <br>
+        </td>
+        </tr>
+        </div>
+    
+        <tr id="test5" 
+         bgcolor="#2aa77d" 
+        >
+        <td class="buttonholder">
+        <button class="collapsebutton" onclick="docollapse('content-5')">
+        expand
+        </button>
+        </td>
+        <td class="test_desc">
+         PASS 
+        </td>
+        <td class="test_desc" id="0-RUN-TESTS/03-BESTF/prog-run-03-BESTF.out"> 0-RUN-TESTS/03-BESTF/prog-run-03-BESTF.out </td>
+        </tr>
+        <div class="test-content" >
+        <tr id="content-5" class="collapsible">
+        <td colspan="5" class="code">
+
+
+        
+            
+            <h2> Output </h2>
+
+            
+
+            <div class="compcode">
+            
+                
+    <table class="diff" id="difflib_chg_to3__top"
+           cellspacing="0" cellpadding="0" rules="groups" >
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <thead><tr><th class="diff_next"><br /></th><th colspan="2" class="diff_header">Submission</th><th class="diff_next"><br /></th><th colspan="2" class="diff_header">Reference</th></tr></thead>
+        <tbody>
+            <tr><td class="diff_next"><a href="#difflib_chg_to3__top">t</a></td><td class="diff_header" id="from3_1">1</td><td nowrap="nowrap">Algorithm:&nbsp;BestF</td><td class="diff_next"><a href="#difflib_chg_to3__top">t</a></td><td class="diff_header" id="to3_1">1</td><td nowrap="nowrap">Algorithm:&nbsp;BestF</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from3_2">2</td><td nowrap="nowrap">Prob&nbsp;Type:&nbsp;Default</td><td class="diff_next"></td><td class="diff_header" id="to3_2">2</td><td nowrap="nowrap">Prob&nbsp;Type:&nbsp;Default</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from3_3">3</td><td nowrap="nowrap">&nbsp;&nbsp;0&nbsp;1&nbsp;2&nbsp;3</td><td class="diff_next"></td><td class="diff_header" id="to3_3">3</td><td nowrap="nowrap">&nbsp;&nbsp;0&nbsp;1&nbsp;2&nbsp;3</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from3_4">4</td><td nowrap="nowrap">0&nbsp;S&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to3_4">4</td><td nowrap="nowrap">0&nbsp;S&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from3_5">5</td><td nowrap="nowrap">1&nbsp;.&nbsp;O&nbsp;O&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to3_5">5</td><td nowrap="nowrap">1&nbsp;.&nbsp;O&nbsp;O&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from3_6">6</td><td nowrap="nowrap">2&nbsp;.&nbsp;O&nbsp;O&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to3_6">6</td><td nowrap="nowrap">2&nbsp;.&nbsp;O&nbsp;O&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from3_7">7</td><td nowrap="nowrap">3&nbsp;.&nbsp;.&nbsp;.&nbsp;G</td><td class="diff_next"></td><td class="diff_header" id="to3_7">7</td><td nowrap="nowrap">3&nbsp;.&nbsp;.&nbsp;.&nbsp;G</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from3_8">8</td><td nowrap="nowrap">4.8</td><td class="diff_next"></td><td class="diff_header" id="to3_8">8</td><td nowrap="nowrap">4.8</td></tr>
+        </tbody>
+    </table>
+            </div>
+            
+
+        
+        <br> <br>
+        </td>
+        </tr>
+        </div>
+    
+        <tr id="test6" 
+         bgcolor="#2aa77d" 
+        >
+        <td class="buttonholder">
+        <button class="collapsebutton" onclick="docollapse('content-6')">
+        expand
+        </button>
+        </td>
+        <td class="test_desc">
+         PASS 
+        </td>
+        <td class="test_desc" id="0-RUN-TESTS/04-BESTF/prog-run-04-BESTF.out"> 0-RUN-TESTS/04-BESTF/prog-run-04-BESTF.out </td>
+        </tr>
+        <div class="test-content" >
+        <tr id="content-6" class="collapsible">
+        <td colspan="5" class="code">
+
+
+        
+            
+            <h2> Output </h2>
+
+            
+
+            <div class="compcode">
+            
+                
+    <table class="diff" id="difflib_chg_to4__top"
+           cellspacing="0" cellpadding="0" rules="groups" >
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <thead><tr><th class="diff_next"><br /></th><th colspan="2" class="diff_header">Submission</th><th class="diff_next"><br /></th><th colspan="2" class="diff_header">Reference</th></tr></thead>
+        <tbody>
+            <tr><td class="diff_next"><a href="#difflib_chg_to4__top">t</a></td><td class="diff_header" id="from4_1">1</td><td nowrap="nowrap">Algorithm:&nbsp;BestF</td><td class="diff_next"><a href="#difflib_chg_to4__top">t</a></td><td class="diff_header" id="to4_1">1</td><td nowrap="nowrap">Algorithm:&nbsp;BestF</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from4_2">2</td><td nowrap="nowrap">Prob&nbsp;Type:&nbsp;Default</td><td class="diff_next"></td><td class="diff_header" id="to4_2">2</td><td nowrap="nowrap">Prob&nbsp;Type:&nbsp;Default</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from4_3">3</td><td nowrap="nowrap">&nbsp;&nbsp;0&nbsp;1&nbsp;2&nbsp;3&nbsp;4&nbsp;5</td><td class="diff_next"></td><td class="diff_header" id="to4_3">3</td><td nowrap="nowrap">&nbsp;&nbsp;0&nbsp;1&nbsp;2&nbsp;3&nbsp;4&nbsp;5</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from4_4">4</td><td nowrap="nowrap">0&nbsp;.&nbsp;.&nbsp;O&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to4_4">4</td><td nowrap="nowrap">0&nbsp;.&nbsp;.&nbsp;O&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from4_5">5</td><td nowrap="nowrap">1&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to4_5">5</td><td nowrap="nowrap">1&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from4_6">6</td><td nowrap="nowrap">2&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;S</td><td class="diff_next"></td><td class="diff_header" id="to4_6">6</td><td nowrap="nowrap">2&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;S</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from4_7">7</td><td nowrap="nowrap">3&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to4_7">7</td><td nowrap="nowrap">3&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from4_8">8</td><td nowrap="nowrap">4&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to4_8">8</td><td nowrap="nowrap">4&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from4_9">9</td><td nowrap="nowrap">5&nbsp;G&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to4_9">9</td><td nowrap="nowrap">5&nbsp;G&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from4_10">10</td><td nowrap="nowrap">6.8</td><td class="diff_next"></td><td class="diff_header" id="to4_10">10</td><td nowrap="nowrap">6.8</td></tr>
+        </tbody>
+    </table>
+            </div>
+            
+
+        
+        <br> <br>
+        </td>
+        </tr>
+        </div>
+    
+        <tr id="test7" 
+         bgcolor="#2aa77d" 
+        >
+        <td class="buttonholder">
+        <button class="collapsebutton" onclick="docollapse('content-7')">
+        expand
+        </button>
+        </td>
+        <td class="test_desc">
+         PASS 
+        </td>
+        <td class="test_desc" id="0-RUN-TESTS/06-BESTF/prog-run-06-BESTF.out"> 0-RUN-TESTS/06-BESTF/prog-run-06-BESTF.out </td>
+        </tr>
+        <div class="test-content" >
+        <tr id="content-7" class="collapsible">
+        <td colspan="5" class="code">
+
+
+        
+            
+            <h2> Output </h2>
+
+            
+
+            <div class="compcode">
+            
+                
+    <table class="diff" id="difflib_chg_to5__top"
+           cellspacing="0" cellpadding="0" rules="groups" >
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <thead><tr><th class="diff_next"><br /></th><th colspan="2" class="diff_header">Submission</th><th class="diff_next"><br /></th><th colspan="2" class="diff_header">Reference</th></tr></thead>
+        <tbody>
+            <tr><td class="diff_next"><a href="#difflib_chg_to5__top">t</a></td><td class="diff_header" id="from5_1">1</td><td nowrap="nowrap">Algorithm:&nbsp;BestF</td><td class="diff_next"><a href="#difflib_chg_to5__top">t</a></td><td class="diff_header" id="to5_1">1</td><td nowrap="nowrap">Algorithm:&nbsp;BestF</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from5_2">2</td><td nowrap="nowrap">Prob&nbsp;Type:&nbsp;Default</td><td class="diff_next"></td><td class="diff_header" id="to5_2">2</td><td nowrap="nowrap">Prob&nbsp;Type:&nbsp;Default</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from5_3">3</td><td nowrap="nowrap">&nbsp;&nbsp;0&nbsp;1&nbsp;2&nbsp;3&nbsp;4&nbsp;5&nbsp;6&nbsp;7&nbsp;8&nbsp;9</td><td class="diff_next"></td><td class="diff_header" id="to5_3">3</td><td nowrap="nowrap">&nbsp;&nbsp;0&nbsp;1&nbsp;2&nbsp;3&nbsp;4&nbsp;5&nbsp;6&nbsp;7&nbsp;8&nbsp;9</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from5_4">4</td><td nowrap="nowrap">0&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;S</td><td class="diff_next"></td><td class="diff_header" id="to5_4">4</td><td nowrap="nowrap">0&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;S</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from5_5">5</td><td nowrap="nowrap">1&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to5_5">5</td><td nowrap="nowrap">1&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from5_6">6</td><td nowrap="nowrap">2&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to5_6">6</td><td nowrap="nowrap">2&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from5_7">7</td><td nowrap="nowrap">3&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to5_7">7</td><td nowrap="nowrap">3&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from5_8">8</td><td nowrap="nowrap">4&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to5_8">8</td><td nowrap="nowrap">4&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from5_9">9</td><td nowrap="nowrap">5&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to5_9">9</td><td nowrap="nowrap">5&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from5_10">10</td><td nowrap="nowrap">6&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;G&nbsp;.&nbsp;O&nbsp;O&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to5_10">10</td><td nowrap="nowrap">6&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;G&nbsp;.&nbsp;O&nbsp;O&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from5_11">11</td><td nowrap="nowrap">7&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to5_11">11</td><td nowrap="nowrap">7&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from5_12">12</td><td nowrap="nowrap">8&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;O&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to5_12">12</td><td nowrap="nowrap">8&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;O&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from5_13">13</td><td nowrap="nowrap">9&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to5_13">13</td><td nowrap="nowrap">9&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from5_14">14</td><td nowrap="nowrap">14.7</td><td class="diff_next"></td><td class="diff_header" id="to5_14">14</td><td nowrap="nowrap">14.7</td></tr>
+        </tbody>
+    </table>
+            </div>
+            
+
+        
+        <br> <br>
+        </td>
+        </tr>
+        </div>
+    
+        <tr id="test8" 
+         bgcolor="#2aa77d" 
+        >
+        <td class="buttonholder">
+        <button class="collapsebutton" onclick="docollapse('content-8')">
+        expand
+        </button>
+        </td>
+        <td class="test_desc">
+         PASS 
+        </td>
+        <td class="test_desc" id="0-RUN-TESTS/10-ASTAR/prog-run-10-ASTAR.out"> 0-RUN-TESTS/10-ASTAR/prog-run-10-ASTAR.out </td>
+        </tr>
+        <div class="test-content" >
+        <tr id="content-8" class="collapsible">
+        <td colspan="5" class="code">
+
+
+        
+            
+            <h2> Output </h2>
+
+            
+
+            <div class="compcode">
+            
+                
+    <table class="diff" id="difflib_chg_to6__top"
+           cellspacing="0" cellpadding="0" rules="groups" >
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <thead><tr><th class="diff_next"><br /></th><th colspan="2" class="diff_header">Submission</th><th class="diff_next"><br /></th><th colspan="2" class="diff_header">Reference</th></tr></thead>
+        <tbody>
+            <tr><td class="diff_next"><a href="#difflib_chg_to6__top">t</a></td><td class="diff_header" id="from6_1">1</td><td nowrap="nowrap">Algorithm:&nbsp;AStar</td><td class="diff_next"><a href="#difflib_chg_to6__top">t</a></td><td class="diff_header" id="to6_1">1</td><td nowrap="nowrap">Algorithm:&nbsp;AStar</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from6_2">2</td><td nowrap="nowrap">Prob&nbsp;Type:&nbsp;Default</td><td class="diff_next"></td><td class="diff_header" id="to6_2">2</td><td nowrap="nowrap">Prob&nbsp;Type:&nbsp;Default</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from6_3">3</td><td nowrap="nowrap">&nbsp;&nbsp;0&nbsp;1&nbsp;2&nbsp;3</td><td class="diff_next"></td><td class="diff_header" id="to6_3">3</td><td nowrap="nowrap">&nbsp;&nbsp;0&nbsp;1&nbsp;2&nbsp;3</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from6_4">4</td><td nowrap="nowrap">0&nbsp;S&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to6_4">4</td><td nowrap="nowrap">0&nbsp;S&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from6_5">5</td><td nowrap="nowrap">1&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to6_5">5</td><td nowrap="nowrap">1&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from6_6">6</td><td nowrap="nowrap">2&nbsp;.&nbsp;.&nbsp;G&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to6_6">6</td><td nowrap="nowrap">2&nbsp;.&nbsp;.&nbsp;G&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from6_7">7</td><td nowrap="nowrap">3&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to6_7">7</td><td nowrap="nowrap">3&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from6_8">8</td><td nowrap="nowrap">2.8</td><td class="diff_next"></td><td class="diff_header" id="to6_8">8</td><td nowrap="nowrap">2.8</td></tr>
+        </tbody>
+    </table>
+            </div>
+            
+
+        
+        <br> <br>
+        </td>
+        </tr>
+        </div>
+    
+        <tr id="test9" 
+         bgcolor="#2aa77d" 
+        >
+        <td class="buttonholder">
+        <button class="collapsebutton" onclick="docollapse('content-9')">
+        expand
+        </button>
+        </td>
+        <td class="test_desc">
+         PASS 
+        </td>
+        <td class="test_desc" id="0-RUN-TESTS/11-ASTAR/prog-run-11-ASTAR.out"> 0-RUN-TESTS/11-ASTAR/prog-run-11-ASTAR.out </td>
+        </tr>
+        <div class="test-content" >
+        <tr id="content-9" class="collapsible">
+        <td colspan="5" class="code">
+
+
+        
+            
+            <h2> Output </h2>
+
+            
+
+            <div class="compcode">
+            
+                
+    <table class="diff" id="difflib_chg_to7__top"
+           cellspacing="0" cellpadding="0" rules="groups" >
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <thead><tr><th class="diff_next"><br /></th><th colspan="2" class="diff_header">Submission</th><th class="diff_next"><br /></th><th colspan="2" class="diff_header">Reference</th></tr></thead>
+        <tbody>
+            <tr><td class="diff_next"><a href="#difflib_chg_to7__top">t</a></td><td class="diff_header" id="from7_1">1</td><td nowrap="nowrap">Algorithm:&nbsp;AStar</td><td class="diff_next"><a href="#difflib_chg_to7__top">t</a></td><td class="diff_header" id="to7_1">1</td><td nowrap="nowrap">Algorithm:&nbsp;AStar</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from7_2">2</td><td nowrap="nowrap">Prob&nbsp;Type:&nbsp;Default</td><td class="diff_next"></td><td class="diff_header" id="to7_2">2</td><td nowrap="nowrap">Prob&nbsp;Type:&nbsp;Default</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from7_3">3</td><td nowrap="nowrap">&nbsp;&nbsp;0&nbsp;1&nbsp;2&nbsp;3&nbsp;4&nbsp;5</td><td class="diff_next"></td><td class="diff_header" id="to7_3">3</td><td nowrap="nowrap">&nbsp;&nbsp;0&nbsp;1&nbsp;2&nbsp;3&nbsp;4&nbsp;5</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from7_4">4</td><td nowrap="nowrap">0&nbsp;.&nbsp;S&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to7_4">4</td><td nowrap="nowrap">0&nbsp;.&nbsp;S&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from7_5">5</td><td nowrap="nowrap">1&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to7_5">5</td><td nowrap="nowrap">1&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from7_6">6</td><td nowrap="nowrap">2&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to7_6">6</td><td nowrap="nowrap">2&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from7_7">7</td><td nowrap="nowrap">3&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;G</td><td class="diff_next"></td><td class="diff_header" id="to7_7">7</td><td nowrap="nowrap">3&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;G</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from7_8">8</td><td nowrap="nowrap">4&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to7_8">8</td><td nowrap="nowrap">4&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from7_9">9</td><td nowrap="nowrap">5&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to7_9">9</td><td nowrap="nowrap">5&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from7_10">10</td><td nowrap="nowrap">5.2</td><td class="diff_next"></td><td class="diff_header" id="to7_10">10</td><td nowrap="nowrap">5.2</td></tr>
+        </tbody>
+    </table>
+            </div>
+            
+
+        
+        <br> <br>
+        </td>
+        </tr>
+        </div>
+    
+        <tr id="test10" 
+         bgcolor="#2aa77d" 
+        >
+        <td class="buttonholder">
+        <button class="collapsebutton" onclick="docollapse('content-10')">
+        expand
+        </button>
+        </td>
+        <td class="test_desc">
+         PASS 
+        </td>
+        <td class="test_desc" id="0-RUN-TESTS/12-ASTAR/prog-run-12-ASTAR.out"> 0-RUN-TESTS/12-ASTAR/prog-run-12-ASTAR.out </td>
+        </tr>
+        <div class="test-content" >
+        <tr id="content-10" class="collapsible">
+        <td colspan="5" class="code">
+
+
+        
+            
+            <h2> Output </h2>
+
+            
+
+            <div class="compcode">
+            
+                
+    <table class="diff" id="difflib_chg_to8__top"
+           cellspacing="0" cellpadding="0" rules="groups" >
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <thead><tr><th class="diff_next"><br /></th><th colspan="2" class="diff_header">Submission</th><th class="diff_next"><br /></th><th colspan="2" class="diff_header">Reference</th></tr></thead>
+        <tbody>
+            <tr><td class="diff_next"><a href="#difflib_chg_to8__top">t</a></td><td class="diff_header" id="from8_1">1</td><td nowrap="nowrap">Algorithm:&nbsp;AStar</td><td class="diff_next"><a href="#difflib_chg_to8__top">t</a></td><td class="diff_header" id="to8_1">1</td><td nowrap="nowrap">Algorithm:&nbsp;AStar</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from8_2">2</td><td nowrap="nowrap">Prob&nbsp;Type:&nbsp;Default</td><td class="diff_next"></td><td class="diff_header" id="to8_2">2</td><td nowrap="nowrap">Prob&nbsp;Type:&nbsp;Default</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from8_3">3</td><td nowrap="nowrap">&nbsp;&nbsp;0&nbsp;1&nbsp;2&nbsp;3&nbsp;4</td><td class="diff_next"></td><td class="diff_header" id="to8_3">3</td><td nowrap="nowrap">&nbsp;&nbsp;0&nbsp;1&nbsp;2&nbsp;3&nbsp;4</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from8_4">4</td><td nowrap="nowrap">0&nbsp;S&nbsp;.&nbsp;O&nbsp;O&nbsp;O</td><td class="diff_next"></td><td class="diff_header" id="to8_4">4</td><td nowrap="nowrap">0&nbsp;S&nbsp;.&nbsp;O&nbsp;O&nbsp;O</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from8_5">5</td><td nowrap="nowrap">1&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O</td><td class="diff_next"></td><td class="diff_header" id="to8_5">5</td><td nowrap="nowrap">1&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from8_6">6</td><td nowrap="nowrap">2&nbsp;O&nbsp;O&nbsp;G&nbsp;O&nbsp;O</td><td class="diff_next"></td><td class="diff_header" id="to8_6">6</td><td nowrap="nowrap">2&nbsp;O&nbsp;O&nbsp;G&nbsp;O&nbsp;O</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from8_7">7</td><td nowrap="nowrap">3&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O</td><td class="diff_next"></td><td class="diff_header" id="to8_7">7</td><td nowrap="nowrap">3&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from8_8">8</td><td nowrap="nowrap">4&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O</td><td class="diff_next"></td><td class="diff_header" id="to8_8">8</td><td nowrap="nowrap">4&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from8_9">9</td><td nowrap="nowrap">0.0</td><td class="diff_next"></td><td class="diff_header" id="to8_9">9</td><td nowrap="nowrap">0.0</td></tr>
+        </tbody>
+    </table>
+            </div>
+            
+
+        
+        <br> <br>
+        </td>
+        </tr>
+        </div>
+    
+        <tr id="test11" 
+         bgcolor="#2aa77d" 
+        >
+        <td class="buttonholder">
+        <button class="collapsebutton" onclick="docollapse('content-11')">
+        expand
+        </button>
+        </td>
+        <td class="test_desc">
+         PASS 
+        </td>
+        <td class="test_desc" id="0-RUN-TESTS/13-ASTAR/prog-run-13-ASTAR.out"> 0-RUN-TESTS/13-ASTAR/prog-run-13-ASTAR.out </td>
+        </tr>
+        <div class="test-content" >
+        <tr id="content-11" class="collapsible">
+        <td colspan="5" class="code">
+
+
+        
+            
+            <h2> Output </h2>
+
+            
+
+            <div class="compcode">
+            
+                
+    <table class="diff" id="difflib_chg_to9__top"
+           cellspacing="0" cellpadding="0" rules="groups" >
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <thead><tr><th class="diff_next"><br /></th><th colspan="2" class="diff_header">Submission</th><th class="diff_next"><br /></th><th colspan="2" class="diff_header">Reference</th></tr></thead>
+        <tbody>
+            <tr><td class="diff_next"><a href="#difflib_chg_to9__top">t</a></td><td class="diff_header" id="from9_1">1</td><td nowrap="nowrap">Algorithm:&nbsp;AStar</td><td class="diff_next"><a href="#difflib_chg_to9__top">t</a></td><td class="diff_header" id="to9_1">1</td><td nowrap="nowrap">Algorithm:&nbsp;AStar</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from9_2">2</td><td nowrap="nowrap">Prob&nbsp;Type:&nbsp;Default</td><td class="diff_next"></td><td class="diff_header" id="to9_2">2</td><td nowrap="nowrap">Prob&nbsp;Type:&nbsp;Default</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from9_3">3</td><td nowrap="nowrap">&nbsp;&nbsp;0&nbsp;1&nbsp;2&nbsp;3</td><td class="diff_next"></td><td class="diff_header" id="to9_3">3</td><td nowrap="nowrap">&nbsp;&nbsp;0&nbsp;1&nbsp;2&nbsp;3</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from9_4">4</td><td nowrap="nowrap">0&nbsp;S&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to9_4">4</td><td nowrap="nowrap">0&nbsp;S&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from9_5">5</td><td nowrap="nowrap">1&nbsp;.&nbsp;O&nbsp;O&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to9_5">5</td><td nowrap="nowrap">1&nbsp;.&nbsp;O&nbsp;O&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from9_6">6</td><td nowrap="nowrap">2&nbsp;.&nbsp;O&nbsp;O&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to9_6">6</td><td nowrap="nowrap">2&nbsp;.&nbsp;O&nbsp;O&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from9_7">7</td><td nowrap="nowrap">3&nbsp;.&nbsp;.&nbsp;.&nbsp;G</td><td class="diff_next"></td><td class="diff_header" id="to9_7">7</td><td nowrap="nowrap">3&nbsp;.&nbsp;.&nbsp;.&nbsp;G</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from9_8">8</td><td nowrap="nowrap">4.8</td><td class="diff_next"></td><td class="diff_header" id="to9_8">8</td><td nowrap="nowrap">4.8</td></tr>
+        </tbody>
+    </table>
+            </div>
+            
+
+        
+        <br> <br>
+        </td>
+        </tr>
+        </div>
+    
+        <tr id="test12" 
+         bgcolor="#2aa77d" 
+        >
+        <td class="buttonholder">
+        <button class="collapsebutton" onclick="docollapse('content-12')">
+        expand
+        </button>
+        </td>
+        <td class="test_desc">
+         PASS 
+        </td>
+        <td class="test_desc" id="0-RUN-TESTS/14-ASTAR/prog-run-14-ASTAR.out"> 0-RUN-TESTS/14-ASTAR/prog-run-14-ASTAR.out </td>
+        </tr>
+        <div class="test-content" >
+        <tr id="content-12" class="collapsible">
+        <td colspan="5" class="code">
+
+
+        
+            
+            <h2> Output </h2>
+
+            
+
+            <div class="compcode">
+            
+                
+    <table class="diff" id="difflib_chg_to10__top"
+           cellspacing="0" cellpadding="0" rules="groups" >
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <thead><tr><th class="diff_next"><br /></th><th colspan="2" class="diff_header">Submission</th><th class="diff_next"><br /></th><th colspan="2" class="diff_header">Reference</th></tr></thead>
+        <tbody>
+            <tr><td class="diff_next"><a href="#difflib_chg_to10__top">t</a></td><td class="diff_header" id="from10_1">1</td><td nowrap="nowrap">Algorithm:&nbsp;AStar</td><td class="diff_next"><a href="#difflib_chg_to10__top">t</a></td><td class="diff_header" id="to10_1">1</td><td nowrap="nowrap">Algorithm:&nbsp;AStar</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from10_2">2</td><td nowrap="nowrap">Prob&nbsp;Type:&nbsp;Default</td><td class="diff_next"></td><td class="diff_header" id="to10_2">2</td><td nowrap="nowrap">Prob&nbsp;Type:&nbsp;Default</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from10_3">3</td><td nowrap="nowrap">&nbsp;&nbsp;0&nbsp;1&nbsp;2&nbsp;3&nbsp;4&nbsp;5</td><td class="diff_next"></td><td class="diff_header" id="to10_3">3</td><td nowrap="nowrap">&nbsp;&nbsp;0&nbsp;1&nbsp;2&nbsp;3&nbsp;4&nbsp;5</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from10_4">4</td><td nowrap="nowrap">0&nbsp;.&nbsp;.&nbsp;O&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to10_4">4</td><td nowrap="nowrap">0&nbsp;.&nbsp;.&nbsp;O&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from10_5">5</td><td nowrap="nowrap">1&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to10_5">5</td><td nowrap="nowrap">1&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from10_6">6</td><td nowrap="nowrap">2&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;S</td><td class="diff_next"></td><td class="diff_header" id="to10_6">6</td><td nowrap="nowrap">2&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;S</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from10_7">7</td><td nowrap="nowrap">3&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to10_7">7</td><td nowrap="nowrap">3&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from10_8">8</td><td nowrap="nowrap">4&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to10_8">8</td><td nowrap="nowrap">4&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from10_9">9</td><td nowrap="nowrap">5&nbsp;G&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to10_9">9</td><td nowrap="nowrap">5&nbsp;G&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from10_10">10</td><td nowrap="nowrap">6.8</td><td class="diff_next"></td><td class="diff_header" id="to10_10">10</td><td nowrap="nowrap">6.8</td></tr>
+        </tbody>
+    </table>
+            </div>
+            
+
+        
+        <br> <br>
+        </td>
+        </tr>
+        </div>
+    
+        <tr id="test13" 
+         bgcolor="#2aa77d" 
+        >
+        <td class="buttonholder">
+        <button class="collapsebutton" onclick="docollapse('content-13')">
+        expand
+        </button>
+        </td>
+        <td class="test_desc">
+         PASS 
+        </td>
+        <td class="test_desc" id="0-RUN-TESTS/15-ASTAR/prog-run-15-ASTAR.out"> 0-RUN-TESTS/15-ASTAR/prog-run-15-ASTAR.out </td>
+        </tr>
+        <div class="test-content" >
+        <tr id="content-13" class="collapsible">
+        <td colspan="5" class="code">
+
+
+        
+            
+            <h2> Output </h2>
+
+            
+
+            <div class="compcode">
+            
+                
+    <table class="diff" id="difflib_chg_to11__top"
+           cellspacing="0" cellpadding="0" rules="groups" >
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <thead><tr><th class="diff_next"><br /></th><th colspan="2" class="diff_header">Submission</th><th class="diff_next"><br /></th><th colspan="2" class="diff_header">Reference</th></tr></thead>
+        <tbody>
+            <tr><td class="diff_next"><a href="#difflib_chg_to11__top">t</a></td><td class="diff_header" id="from11_1">1</td><td nowrap="nowrap">Algorithm:&nbsp;AStar</td><td class="diff_next"><a href="#difflib_chg_to11__top">t</a></td><td class="diff_header" id="to11_1">1</td><td nowrap="nowrap">Algorithm:&nbsp;AStar</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from11_2">2</td><td nowrap="nowrap">Prob&nbsp;Type:&nbsp;Default</td><td class="diff_next"></td><td class="diff_header" id="to11_2">2</td><td nowrap="nowrap">Prob&nbsp;Type:&nbsp;Default</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from11_3">3</td><td nowrap="nowrap">&nbsp;&nbsp;0&nbsp;1&nbsp;2&nbsp;3&nbsp;4&nbsp;5&nbsp;6&nbsp;7&nbsp;8&nbsp;9&nbsp;0&nbsp;1&nbsp;2&nbsp;3&nbsp;4&nbsp;5&nbsp;6&nbsp;7&nbsp;8&nbsp;9</td><td class="diff_next"></td><td class="diff_header" id="to11_3">3</td><td nowrap="nowrap">&nbsp;&nbsp;0&nbsp;1&nbsp;2&nbsp;3&nbsp;4&nbsp;5&nbsp;6&nbsp;7&nbsp;8&nbsp;9&nbsp;0&nbsp;1&nbsp;2&nbsp;3&nbsp;4&nbsp;5&nbsp;6&nbsp;7&nbsp;8&nbsp;9</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from11_4">4</td><td nowrap="nowrap">0&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to11_4">4</td><td nowrap="nowrap">0&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from11_5">5</td><td nowrap="nowrap">1&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;S&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to11_5">5</td><td nowrap="nowrap">1&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;S&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from11_6">6</td><td nowrap="nowrap">2&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to11_6">6</td><td nowrap="nowrap">2&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from11_7">7</td><td nowrap="nowrap">3&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to11_7">7</td><td nowrap="nowrap">3&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from11_8">8</td><td nowrap="nowrap">4&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to11_8">8</td><td nowrap="nowrap">4&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from11_9">9</td><td nowrap="nowrap">5&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to11_9">9</td><td nowrap="nowrap">5&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from11_10">10</td><td nowrap="nowrap">6&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to11_10">10</td><td nowrap="nowrap">6&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from11_11">11</td><td nowrap="nowrap">7&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to11_11">11</td><td nowrap="nowrap">7&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from11_12">12</td><td nowrap="nowrap">8&nbsp;.&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to11_12">12</td><td nowrap="nowrap">8&nbsp;.&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from11_13">13</td><td nowrap="nowrap">9&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to11_13">13</td><td nowrap="nowrap">9&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from11_14">14</td><td nowrap="nowrap">0&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to11_14">14</td><td nowrap="nowrap">0&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from11_15">15</td><td nowrap="nowrap">1&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to11_15">15</td><td nowrap="nowrap">1&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from11_16">16</td><td nowrap="nowrap">2&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to11_16">16</td><td nowrap="nowrap">2&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from11_17">17</td><td nowrap="nowrap">3&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to11_17">17</td><td nowrap="nowrap">3&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from11_18">18</td><td nowrap="nowrap">4&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to11_18">18</td><td nowrap="nowrap">4&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from11_19">19</td><td nowrap="nowrap">5&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to11_19">19</td><td nowrap="nowrap">5&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from11_20">20</td><td nowrap="nowrap">6&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to11_20">20</td><td nowrap="nowrap">6&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from11_21">21</td><td nowrap="nowrap">7&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to11_21">21</td><td nowrap="nowrap">7&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from11_22">22</td><td nowrap="nowrap">8&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to11_22">22</td><td nowrap="nowrap">8&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from11_23">23</td><td nowrap="nowrap">9&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;G&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to11_23">23</td><td nowrap="nowrap">9&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;G&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from11_24">24</td><td nowrap="nowrap">21.7</td><td class="diff_next"></td><td class="diff_header" id="to11_24">24</td><td nowrap="nowrap">21.7</td></tr>
+        </tbody>
+    </table>
+            </div>
+            
+
+        
+        <br> <br>
+        </td>
+        </tr>
+        </div>
+    
+        <tr id="test14" 
+         bgcolor="#2aa77d" 
+        >
+        <td class="buttonholder">
+        <button class="collapsebutton" onclick="docollapse('content-14')">
+        expand
+        </button>
+        </td>
+        <td class="test_desc">
+         PASS 
+        </td>
+        <td class="test_desc" id="0-RUN-TESTS/16-ASTAR/prog-run-16-ASTAR.out"> 0-RUN-TESTS/16-ASTAR/prog-run-16-ASTAR.out </td>
+        </tr>
+        <div class="test-content" >
+        <tr id="content-14" class="collapsible">
+        <td colspan="5" class="code">
+
+
+        
+            
+            <h2> Output </h2>
+
+            
+
+            <div class="compcode">
+            
+                
+    <table class="diff" id="difflib_chg_to12__top"
+           cellspacing="0" cellpadding="0" rules="groups" >
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
+        <thead><tr><th class="diff_next"><br /></th><th colspan="2" class="diff_header">Submission</th><th class="diff_next"><br /></th><th colspan="2" class="diff_header">Reference</th></tr></thead>
+        <tbody>
+            <tr><td class="diff_next"><a href="#difflib_chg_to12__top">t</a></td><td class="diff_header" id="from12_1">1</td><td nowrap="nowrap">Algorithm:&nbsp;AStar</td><td class="diff_next"><a href="#difflib_chg_to12__top">t</a></td><td class="diff_header" id="to12_1">1</td><td nowrap="nowrap">Algorithm:&nbsp;AStar</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from12_2">2</td><td nowrap="nowrap">Prob&nbsp;Type:&nbsp;Default</td><td class="diff_next"></td><td class="diff_header" id="to12_2">2</td><td nowrap="nowrap">Prob&nbsp;Type:&nbsp;Default</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from12_3">3</td><td nowrap="nowrap">&nbsp;&nbsp;0&nbsp;1&nbsp;2&nbsp;3&nbsp;4&nbsp;5&nbsp;6&nbsp;7&nbsp;8&nbsp;9</td><td class="diff_next"></td><td class="diff_header" id="to12_3">3</td><td nowrap="nowrap">&nbsp;&nbsp;0&nbsp;1&nbsp;2&nbsp;3&nbsp;4&nbsp;5&nbsp;6&nbsp;7&nbsp;8&nbsp;9</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from12_4">4</td><td nowrap="nowrap">0&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;S</td><td class="diff_next"></td><td class="diff_header" id="to12_4">4</td><td nowrap="nowrap">0&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;S</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from12_5">5</td><td nowrap="nowrap">1&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to12_5">5</td><td nowrap="nowrap">1&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from12_6">6</td><td nowrap="nowrap">2&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to12_6">6</td><td nowrap="nowrap">2&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from12_7">7</td><td nowrap="nowrap">3&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to12_7">7</td><td nowrap="nowrap">3&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from12_8">8</td><td nowrap="nowrap">4&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to12_8">8</td><td nowrap="nowrap">4&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from12_9">9</td><td nowrap="nowrap">5&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to12_9">9</td><td nowrap="nowrap">5&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from12_10">10</td><td nowrap="nowrap">6&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;G&nbsp;.&nbsp;O&nbsp;O&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to12_10">10</td><td nowrap="nowrap">6&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;G&nbsp;.&nbsp;O&nbsp;O&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from12_11">11</td><td nowrap="nowrap">7&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to12_11">11</td><td nowrap="nowrap">7&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;O&nbsp;O&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from12_12">12</td><td nowrap="nowrap">8&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;O&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to12_12">12</td><td nowrap="nowrap">8&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;O&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from12_13">13</td><td nowrap="nowrap">9&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td><td class="diff_next"></td><td class="diff_header" id="to12_13">13</td><td nowrap="nowrap">9&nbsp;O&nbsp;O&nbsp;O&nbsp;O&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.&nbsp;.</td></tr>
+            <tr><td class="diff_next"></td><td class="diff_header" id="from12_14">14</td><td nowrap="nowrap">14.7</td><td class="diff_next"></td><td class="diff_header" id="to12_14">14</td><td nowrap="nowrap">14.7</td></tr>
+        </tbody>
+    </table>
+            </div>
+            
+
+        
+        <br> <br>
+        </td>
+        </tr>
+        </div>
+    
+        <tr id="test15" 
+         bgcolor="#2aa77d" 
+        >
+        <td class="buttonholder">
+        <button class="collapsebutton" onclick="docollapse('content-15')">
+        expand
+        </button>
+        </td>
+        <td class="test_desc">
+         PASS 
+        </td>
+        <td class="test_desc" id="1-INFO-TESTS/20-BESTF-VERBOSE/info-run"> 1-INFO-TESTS/20-BESTF-VERBOSE/info-run </td>
+        </tr>
+        <div class="test-content" >
+        <tr id="content-15" class="collapsible">
+        <td colspan="5" class="code">
+
+
+        
+            <h2> Compiler info </h2>
+            <div display="inline" class="infocode">
+            
+                Algorithm: BestF<br>
+            
+                Prob Type: Default<br>
+            
+                <br>
+            
+                  0 1 2 3 <br>
+            
+                0 S . . . <br>
+            
+                1 . . . . <br>
+            
+                2 . . G . <br>
+            
+                3 . . . . <br>
+            
+                <br>
+            
+                [(0,0)2.8]<br>
+            
+                [(2,2)0.0]<br>
+            
+                2<br>
+            
+                (2,2)(0,0)<br>
+            
+                2.8<br>
+            
+                NOTE:  The tests here only check the format of the output, not the correctness of the system. A simple java program parses the input and checks the last lines of your output. If something is incorrect, the program throws an Exception and the test fails. Please read carefully the output provided, and check Exception messages for information about test failures.<br>
+            
+                NOTE: Checks start from the last line backward.<br>
+            
+                TEST: Checking if the last line of the output is the path cost or -1.0 or 0.0<br>
+            
+                RESULT: PASS<br>
+            
+                TEST: Checking if the path is printed<br>
+            
+                RESULT: PASS<br>
+            
+                TEST: Checking if the number of explored nodes is printed<br>
+            
+                RESULT: PASS<br>
+            
+                NOTE: Remember to print the frontier at each step, no test is provided for this<br>
+            
+            </div>
+            <div class="infocode">
+            
+            </div>
+
+        
+        <br> <br>
+        </td>
+        </tr>
+        </div>
+    
+        <tr id="test16" 
+         bgcolor="#2aa77d" 
+        >
+        <td class="buttonholder">
+        <button class="collapsebutton" onclick="docollapse('content-16')">
+        expand
+        </button>
+        </td>
+        <td class="test_desc">
+         PASS 
+        </td>
+        <td class="test_desc" id="1-INFO-TESTS/22-BESTF-VERBOSE/info-run"> 1-INFO-TESTS/22-BESTF-VERBOSE/info-run </td>
+        </tr>
+        <div class="test-content" >
+        <tr id="content-16" class="collapsible">
+        <td colspan="5" class="code">
+
+
+        
+            <h2> Compiler info </h2>
+            <div display="inline" class="infocode">
+            
+                Algorithm: BestF<br>
+            
+                Prob Type: Default<br>
+            
+                <br>
+            
+                  0 1 2 3 4 <br>
+            
+                0 S . O O O <br>
+            
+                1 . O O O O <br>
+            
+                2 O O G O O <br>
+            
+                3 O O O O O <br>
+            
+                4 O O O O O <br>
+            
+                <br>
+            
+                [(0,0)2.8]<br>
+            
+                [(0,2)2.0, (2,0)2.0]<br>
+            
+                [(2,0)2.0, (0,4)2.8, (2,0)2.0]<br>
+            
+                [(2,0)2.0, (0,4)2.8, (4,0)2.8]<br>
+            
+                [(0,4)2.8, (4,0)2.8, (4,0)2.8]<br>
+            
+                [(4,0)2.8, (4,0)2.8, (4,4)2.8]<br>
+            
+                [(4,0)2.8, (4,4)2.8, (4,4)2.8]<br>
+            
+                [(4,4)2.8, (4,4)2.8, (4,4)2.8]<br>
+            
+                [(4,4)2.8, (4,4)2.8]<br>
+            
+                [(4,4)2.8]<br>
+            
+                6<br>
+            
+                0.0<br>
+            
+                NOTE:  The tests here only check the format of the output, not the correctness of the system. A simple java program parses the input and checks the last lines of your output. If something is incorrect, the program throws an Exception and the test fails. Please read carefully the output provided, and check Exception messages for information about test failures.<br>
+            
+                NOTE: Checks start from the last line backward.<br>
+            
+                TEST: Checking if the last line of the output is the path cost or -1.0 or 0.0<br>
+            
+                RESULT: PASS<br>
+            
+                Checking if the number of explored nodes is printed<br>
+            
+                RESULT: PASS<br>
+            
+                NOTE: Remember to print the frontier at each step, no test is provided for this<br>
+            
+            </div>
+            <div class="infocode">
+            
+            </div>
+
+        
+        <br> <br>
+        </td>
+        </tr>
+        </div>
+    
+        <tr id="test17" 
+         bgcolor="#2aa77d" 
+        >
+        <td class="buttonholder">
+        <button class="collapsebutton" onclick="docollapse('content-17')">
+        expand
+        </button>
+        </td>
+        <td class="test_desc">
+         PASS 
+        </td>
+        <td class="test_desc" id="1-INFO-TESTS/27-BESTF/info-run"> 1-INFO-TESTS/27-BESTF/info-run </td>
+        </tr>
+        <div class="test-content" >
+        <tr id="content-17" class="collapsible">
+        <td colspan="5" class="code">
+
+
+        
+            <h2> Compiler info </h2>
+            <div display="inline" class="infocode">
+            
+                Algorithm: BestF<br>
+            
+                Prob Type: Default<br>
+            
+                <br>
+            
+                  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 <br>
+            
+                0 . . O O O O . . . . . . . . . <br>
+            
+                1 . . O O O O . . . . . . . . . <br>
+            
+                2 . . O O O O . . O . . . . . . <br>
+            
+                3 . . O O O O . O O . . . . . . <br>
+            
+                4 . . . . . . . O O . . . . . . <br>
+            
+                5 . . . . . . O O O . . . . . . <br>
+            
+                6 . . . . . . O O O . . . . . . <br>
+            
+                7 S . . . . O O O O . . G . . . <br>
+            
+                8 . . . . . O O O O . . . . . . <br>
+            
+                9 . . . . . . O O O . . . . . . <br>
+            
+                0 . . . . . . O O O . . . . . . <br>
+            
+                1 . . . . . . . O O . . . . . . <br>
+            
+                2 . . . . . . . O O . . . . . . <br>
+            
+                3 . . . . . . . . O . . . . . . <br>
+            
+                4 . . . . . . . . O . . . . . . <br>
+            
+                <br>
+            
+                17.5<br>
+            
+                NOTE:  The tests here only check the format of the output, not the correctness of the system. A simple java program parses the input and checks the last lines of your output. If something is incorrect, the program throws an Exception and the test fails. Please read carefully the output provided, and check Exception messages for information about test failures.<br>
+            
+                NOTE: Checks start from the last line backward.<br>
+            
+                TEST: Checking if the last line of the output is the path cost or -1.0 or 0.0<br>
+            
+                RESULT: PASS<br>
+            
+            </div>
+            <div class="infocode">
+            
+            </div>
+
+        
+        <br> <br>
+        </td>
+        </tr>
+        </div>
+    
+        <tr id="test18" 
+         bgcolor="#2aa77d" 
+        >
+        <td class="buttonholder">
+        <button class="collapsebutton" onclick="docollapse('content-18')">
+        expand
+        </button>
+        </td>
+        <td class="test_desc">
+         PASS 
+        </td>
+        <td class="test_desc" id="1-INFO-TESTS/28-BESTF/info-run"> 1-INFO-TESTS/28-BESTF/info-run </td>
+        </tr>
+        <div class="test-content" >
+        <tr id="content-18" class="collapsible">
+        <td colspan="5" class="code">
+
+
+        
+            <h2> Compiler info </h2>
+            <div display="inline" class="infocode">
+            
+                Algorithm: BestF<br>
+            
+                Prob Type: Default<br>
+            
+                <br>
+            
+                  0 1 2 3 4 5 6 7 8 9 0 <br>
+            
+                0 O O . . . . O O . O O <br>
+            
+                1 O O . O O . O O . O O <br>
+            
+                2 S . . O O . O O . . . <br>
+            
+                3 O O . O O . O O . O O <br>
+            
+                4 O O . O O . O O . O O <br>
+            
+                5 . . . O O . O O . . G <br>
+            
+                6 O O . O O . O O . O O <br>
+            
+                7 O O . O O . O O . O O <br>
+            
+                8 . . . O O . O O . . . <br>
+            
+                9 O O . O O . O O . O O <br>
+            
+                0 O O . . . . . . . O O <br>
+            
+                <br>
+            
+                22.1<br>
+            
+                NOTE:  The tests here only check the format of the output, not the correctness of the system. A simple java program parses the input and checks the last lines of your output. If something is incorrect, the program throws an Exception and the test fails. Please read carefully the output provided, and check Exception messages for information about test failures.<br>
+            
+                NOTE: Checks start from the last line backward.<br>
+            
+                TEST: Checking if the last line of the output is the path cost or -1.0 or 0.0<br>
+            
+                RESULT: PASS<br>
+            
+            </div>
+            <div class="infocode">
+            
+            </div>
+
+        
+        <br> <br>
+        </td>
+        </tr>
+        </div>
+    
+        <tr id="test19" 
+         bgcolor="#2aa77d" 
+        >
+        <td class="buttonholder">
+        <button class="collapsebutton" onclick="docollapse('content-19')">
+        expand
+        </button>
+        </td>
+        <td class="test_desc">
+         PASS 
+        </td>
+        <td class="test_desc" id="1-INFO-TESTS/29-BESTF/info-run"> 1-INFO-TESTS/29-BESTF/info-run </td>
+        </tr>
+        <div class="test-content" >
+        <tr id="content-19" class="collapsible">
+        <td colspan="5" class="code">
+
+
+        
+            <h2> Compiler info </h2>
+            <div display="inline" class="infocode">
+            
+                Algorithm: BestF<br>
+            
+                Prob Type: Default<br>
+            
+                <br>
+            
+                  0 1 2 3 4 5 6 7 8 9 0 <br>
+            
+                0 O O . O O . O O S O O <br>
+            
+                1 O O . O O . O O . O O <br>
+            
+                2 . . . . . . . . . . . <br>
+            
+                3 O O . O O . O O . O O <br>
+            
+                4 O O . O O . O O . O O <br>
+            
+                5 . . . . . . . . . . . <br>
+            
+                6 O O . O O . O O . O O <br>
+            
+                7 O O . O O . O O . O O <br>
+            
+                8 G . . . . . . . . . . <br>
+            
+                9 O O . O O . O O . O O <br>
+            
+                0 O O . O O . O O . O O <br>
+            
+                <br>
+            
+                12.5<br>
+            
+                NOTE:  The tests here only check the format of the output, not the correctness of the system. A simple java program parses the input and checks the last lines of your output. If something is incorrect, the program throws an Exception and the test fails. Please read carefully the output provided, and check Exception messages for information about test failures.<br>
+            
+                NOTE: Checks start from the last line backward.<br>
+            
+                TEST: Checking if the last line of the output is the path cost or -1.0 or 0.0<br>
+            
+                RESULT: PASS<br>
+            
+            </div>
+            <div class="infocode">
+            
+            </div>
+
+        
+        <br> <br>
+        </td>
+        </tr>
+        </div>
+    
+        <tr id="test20" 
+         bgcolor="#2aa77d" 
+        >
+        <td class="buttonholder">
+        <button class="collapsebutton" onclick="docollapse('content-20')">
+        expand
+        </button>
+        </td>
+        <td class="test_desc">
+         PASS 
+        </td>
+        <td class="test_desc" id="1-INFO-TESTS/30-ASTAR-VERBOSE/info-run"> 1-INFO-TESTS/30-ASTAR-VERBOSE/info-run </td>
+        </tr>
+        <div class="test-content" >
+        <tr id="content-20" class="collapsible">
+        <td colspan="5" class="code">
+
+
+        
+            <h2> Compiler info </h2>
+            <div display="inline" class="infocode">
+            
+                Algorithm: AStar<br>
+            
+                Prob Type: Default<br>
+            
+                <br>
+            
+                  0 1 2 3 <br>
+            
+                0 S . . . <br>
+            
+                1 . . . . <br>
+            
+                2 . . G . <br>
+            
+                3 . . . . <br>
+            
+                <br>
+            
+                [(0,0)2.8]<br>
+            
+                [(2,2)2.8]<br>
+            
+                2<br>
+            
+                (2,2)(0,0)<br>
+            
+                2.8<br>
+            
+                NOTE:  The tests here only check the format of the output, not the correctness of the system. A simple java program parses the input and checks the last lines of your output. If something is incorrect, the program throws an Exception and the test fails. Please read carefully the output provided, and check Exception messages for information about test failures.<br>
+            
+                NOTE: Checks start from the last line backward.<br>
+            
+                TEST: Checking if the last line of the output is the path cost or -1.0 or 0.0<br>
+            
+                RESULT: PASS<br>
+            
+                TEST: Checking if the path is printed<br>
+            
+                RESULT: PASS<br>
+            
+                TEST: Checking if the number of explored nodes is printed<br>
+            
+                RESULT: PASS<br>
+            
+                NOTE: Remember to print the frontier at each step, no test is provided for this<br>
+            
+            </div>
+            <div class="infocode">
+            
+            </div>
+
+        
+        <br> <br>
+        </td>
+        </tr>
+        </div>
+    
+        <tr id="test21" 
+         bgcolor="#2aa77d" 
+        >
+        <td class="buttonholder">
+        <button class="collapsebutton" onclick="docollapse('content-21')">
+        expand
+        </button>
+        </td>
+        <td class="test_desc">
+         PASS 
+        </td>
+        <td class="test_desc" id="1-INFO-TESTS/32-ASTAR-VERBOSE/info-run"> 1-INFO-TESTS/32-ASTAR-VERBOSE/info-run </td>
+        </tr>
+        <div class="test-content" >
+        <tr id="content-21" class="collapsible">
+        <td colspan="5" class="code">
+
+
+        
+            <h2> Compiler info </h2>
+            <div display="inline" class="infocode">
+            
+                Algorithm: AStar<br>
+            
+                Prob Type: Default<br>
+            
+                <br>
+            
+                  0 1 2 3 4 <br>
+            
+                0 S . O O O <br>
+            
+                1 . O O O O <br>
+            
+                2 O O G O O <br>
+            
+                3 O O O O O <br>
+            
+                4 O O O O O <br>
+            
+                <br>
+            
+                [(0,0)2.8]<br>
+            
+                [(2,0)4.0, (0,2)4.0]<br>
+            
+                [(0,2)4.0, (4,0)6.8, (0,2)6.8]<br>
+            
+                [(4,0)6.8, (0,2)6.8, (0,4)6.8]<br>
+            
+                [(0,2)6.8, (0,4)6.8, (4,4)10.8]<br>
+            
+                [(0,4)6.8, (4,4)10.8, (0,4)9.7]<br>
+            
+                [(0,4)9.7, (4,4)10.8, (4,4)10.8]<br>
+            
+                [(4,4)10.8, (4,4)10.8, (4,4)13.7]<br>
+            
+                [(4,4)10.8, (4,4)13.7]<br>
+            
+                [(4,4)13.7]<br>
+            
+                6<br>
+            
+                0.0<br>
+            
+                NOTE:  The tests here only check the format of the output, not the correctness of the system. A simple java program parses the input and checks the last lines of your output. If something is incorrect, the program throws an Exception and the test fails. Please read carefully the output provided, and check Exception messages for information about test failures.<br>
+            
+                NOTE: Checks start from the last line backward.<br>
+            
+                TEST: Checking if the last line of the output is the path cost or -1.0 or 0.0<br>
+            
+                RESULT: PASS<br>
+            
+                Checking if the number of explored nodes is printed<br>
+            
+                RESULT: PASS<br>
+            
+                NOTE: Remember to print the frontier at each step, no test is provided for this<br>
+            
+            </div>
+            <div class="infocode">
+            
+            </div>
+
+        
+        <br> <br>
+        </td>
+        </tr>
+        </div>
+    
+        <tr id="test22" 
+         bgcolor="#2aa77d" 
+        >
+        <td class="buttonholder">
+        <button class="collapsebutton" onclick="docollapse('content-22')">
+        expand
+        </button>
+        </td>
+        <td class="test_desc">
+         PASS 
+        </td>
+        <td class="test_desc" id="1-INFO-TESTS/37-ASTAR/info-run"> 1-INFO-TESTS/37-ASTAR/info-run </td>
+        </tr>
+        <div class="test-content" >
+        <tr id="content-22" class="collapsible">
+        <td colspan="5" class="code">
+
+
+        
+            <h2> Compiler info </h2>
+            <div display="inline" class="infocode">
+            
+                Algorithm: AStar<br>
+            
+                Prob Type: Default<br>
+            
+                <br>
+            
+                  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 <br>
+            
+                0 . . O O O O . . . . . . . . . <br>
+            
+                1 . . O O O O . . . . . . . . . <br>
+            
+                2 . . O O O O . . O . . . . . . <br>
+            
+                3 . . O O O O . O O . . . . . . <br>
+            
+                4 . . . . . . . O O . . . . . . <br>
+            
+                5 . . . . . . O O O . . . . . . <br>
+            
+                6 . . . . . . O O O . . . . . . <br>
+            
+                7 S . . . . O O O O . . G . . . <br>
+            
+                8 . . . . . O O O O . . . . . . <br>
+            
+                9 . . . . . . O O O . . . . . . <br>
+            
+                0 . . . . . . O O O . . . . . . <br>
+            
+                1 . . . . . . . O O . . . . . . <br>
+            
+                2 . . . . . . . O O . . . . . . <br>
+            
+                3 . . . . . . . . O . . . . . . <br>
+            
+                4 . . . . . . . . O . . . . . . <br>
+            
+                <br>
+            
+                16.3<br>
+            
+                NOTE:  The tests here only check the format of the output, not the correctness of the system. A simple java program parses the input and checks the last lines of your output. If something is incorrect, the program throws an Exception and the test fails. Please read carefully the output provided, and check Exception messages for information about test failures.<br>
+            
+                NOTE: Checks start from the last line backward.<br>
+            
+                TEST: Checking if the last line of the output is the path cost or -1.0 or 0.0<br>
+            
+                RESULT: PASS<br>
+            
+            </div>
+            <div class="infocode">
+            
+            </div>
+
+        
+        <br> <br>
+        </td>
+        </tr>
+        </div>
+    
+        <tr id="test23" 
+         bgcolor="#2aa77d" 
+        >
+        <td class="buttonholder">
+        <button class="collapsebutton" onclick="docollapse('content-23')">
+        expand
+        </button>
+        </td>
+        <td class="test_desc">
+         PASS 
+        </td>
+        <td class="test_desc" id="1-INFO-TESTS/38-ASTAR/info-run"> 1-INFO-TESTS/38-ASTAR/info-run </td>
+        </tr>
+        <div class="test-content" >
+        <tr id="content-23" class="collapsible">
+        <td colspan="5" class="code">
+
+
+        
+            <h2> Compiler info </h2>
+            <div display="inline" class="infocode">
+            
+                Algorithm: AStar<br>
+            
+                Prob Type: Default<br>
+            
+                <br>
+            
+                  0 1 2 3 4 5 6 7 8 9 0 <br>
+            
+                0 O O . . . . O O . O O <br>
+            
+                1 O O . O O . O O . O O <br>
+            
+                2 S . . O O . O O . . . <br>
+            
+                3 O O . O O . O O . O O <br>
+            
+                4 O O . O O . O O . O O <br>
+            
+                5 . . . O O . O O . . G <br>
+            
+                6 O O . O O . O O . O O <br>
+            
+                7 O O . O O . O O . O O <br>
+            
+                8 . . . O O . O O . . . <br>
+            
+                9 O O . O O . O O . O O <br>
+            
+                0 O O . . . . . . . O O <br>
+            
+                <br>
+            
+                14.1<br>
+            
+                NOTE:  The tests here only check the format of the output, not the correctness of the system. A simple java program parses the input and checks the last lines of your output. If something is incorrect, the program throws an Exception and the test fails. Please read carefully the output provided, and check Exception messages for information about test failures.<br>
+            
+                NOTE: Checks start from the last line backward.<br>
+            
+                TEST: Checking if the last line of the output is the path cost or -1.0 or 0.0<br>
+            
+                RESULT: PASS<br>
+            
+            </div>
+            <div class="infocode">
+            
+            </div>
+
+        
+        <br> <br>
+        </td>
+        </tr>
+        </div>
+    
+        <tr id="test24" 
+         bgcolor="#2aa77d" 
+        >
+        <td class="buttonholder">
+        <button class="collapsebutton" onclick="docollapse('content-24')">
+        expand
+        </button>
+        </td>
+        <td class="test_desc">
+         PASS 
+        </td>
+        <td class="test_desc" id="1-INFO-TESTS/39-ASTAR/info-run"> 1-INFO-TESTS/39-ASTAR/info-run </td>
+        </tr>
+        <div class="test-content" >
+        <tr id="content-24" class="collapsible">
+        <td colspan="5" class="code">
+
+
+        
+            <h2> Compiler info </h2>
+            <div display="inline" class="infocode">
+            
+                Algorithm: AStar<br>
+            
+                Prob Type: Default<br>
+            
+                <br>
+            
+                  0 1 2 3 4 5 6 7 8 9 0 <br>
+            
+                0 O O . O O . O O S O O <br>
+            
+                1 O O . O O . O O . O O <br>
+            
+                2 . . . . . . . . . . . <br>
+            
+                3 O O . O O . O O . O O <br>
+            
+                4 O O . O O . O O . O O <br>
+            
+                5 . . . . . . . . . . . <br>
+            
+                6 O O . O O . O O . O O <br>
+            
+                7 O O . O O . O O . O O <br>
+            
+                8 G . . . . . . . . . . <br>
+            
+                9 O O . O O . O O . O O <br>
+            
+                0 O O . O O . O O . O O <br>
+            
+                <br>
+            
+                11.3<br>
+            
+                NOTE:  The tests here only check the format of the output, not the correctness of the system. A simple java program parses the input and checks the last lines of your output. If something is incorrect, the program throws an Exception and the test fails. Please read carefully the output provided, and check Exception messages for information about test failures.<br>
+            
+                NOTE: Checks start from the last line backward.<br>
+            
+                TEST: Checking if the last line of the output is the path cost or -1.0 or 0.0<br>
+            
+                RESULT: PASS<br>
+            
+            </div>
+            <div class="infocode">
+            
+            </div>
+
+        
+        <br> <br>
+        </td>
+        </tr>
+        </div>
+    
+        <tr id="test25" 
+         bgcolor="#2aa77d" 
+        >
+        <td class="buttonholder">
+        <button class="collapsebutton" onclick="docollapse('content-25')">
+        expand
+        </button>
+        </td>
+        <td class="test_desc">
+         PASS 
+        </td>
+        <td class="test_desc" id="1-INFO-TESTS/40-ALT/info-run"> 1-INFO-TESTS/40-ALT/info-run </td>
+        </tr>
+        <div class="test-content" >
+        <tr id="content-25" class="collapsible">
+        <td colspan="5" class="code">
+
+
+        
+            <h2> Compiler info </h2>
+            <div display="inline" class="infocode">
+            
+                Algorithm: Alt<br>
+            
+                Prob Type: Default<br>
+            
+                <br>
+            
+                  0 1 2 3 <br>
+            
+                0 S . . . <br>
+            
+                1 . . . . <br>
+            
+                2 . . G . <br>
+            
+                3 . . . . <br>
+            
+                <br>
+            
+                2.8<br>
+            
+                NOTE:  The tests here only check the format of the output, not the correctness of the system. A simple java program parses the input and checks the last lines of your output. If something is incorrect, the program throws an Exception and the test fails. Please read carefully the output provided, and check Exception messages for information about test failures.<br>
+            
+                NOTE: Checks start from the last line backward.<br>
+            
+                TEST: Checking if the last line of the output is the path cost or -1.0 or 0.0<br>
+            
+                RESULT: PASS<br>
+            
+            </div>
+            <div class="infocode">
+            
+            </div>
+
+        
+        <br> <br>
+        </td>
+        </tr>
+        </div>
+    
+        <tr id="test26" 
+         bgcolor="#2aa77d" 
+        >
+        <td class="buttonholder">
+        <button class="collapsebutton" onclick="docollapse('content-26')">
+        expand
+        </button>
+        </td>
+        <td class="test_desc">
+         PASS 
+        </td>
+        <td class="test_desc" id="1-INFO-TESTS/41-ALT-VERBOSE/info-run"> 1-INFO-TESTS/41-ALT-VERBOSE/info-run </td>
+        </tr>
+        <div class="test-content" >
+        <tr id="content-26" class="collapsible">
+        <td colspan="5" class="code">
+
+
+        
+            <h2> Compiler info </h2>
+            <div display="inline" class="infocode">
+            
+                Algorithm: Alt<br>
+            
+                Prob Type: Default<br>
+            
+                <br>
+            
+                  0 1 2 3 4 5 <br>
+            
+                0 . S . . . . <br>
+            
+                1 . . . O . . <br>
+            
+                2 . . O O . . <br>
+            
+                3 . O O O . G <br>
+            
+                4 . . O O O . <br>
+            
+                5 . . . . O . <br>
+            
+                <br>
+            
+                [(3,1)5.2, (1,3)7.0]<br>
+            
+                [(5,3)5.2, (4,5)9.1, (1,3)9.2, (1,0)9.8]<br>
+            
+                2<br>
+            
+                (1,0)(3,1)<br>
+            
+                5.2<br>
+            
+                NOTE:  The tests here only check the format of the output, not the correctness of the system. A simple java program parses the input and checks the last lines of your output. If something is incorrect, the program throws an Exception and the test fails. Please read carefully the output provided, and check Exception messages for information about test failures.<br>
+            
+                NOTE: Checks start from the last line backward.<br>
+            
+                TEST: Checking if the last line of the output is the path cost or -1.0 or 0.0<br>
+            
+                RESULT: PASS<br>
+            
+                TEST: Checking if the path is printed<br>
+            
+                RESULT: PASS<br>
+            
+                TEST: Checking if the number of explored nodes is printed<br>
+            
+                RESULT: PASS<br>
+            
+                NOTE: Remember to print the frontier at each step, no test is provided for this<br>
+            
+            </div>
+            <div class="infocode">
+            
+            </div>
+
+        
+        <br> <br>
+        </td>
+        </tr>
+        </div>
+    
+        <tr id="test27" 
+         bgcolor="#2aa77d" 
+        >
+        <td class="buttonholder">
+        <button class="collapsebutton" onclick="docollapse('content-27')">
+        expand
+        </button>
+        </td>
+        <td class="test_desc">
+         PASS 
+        </td>
+        <td class="test_desc" id="1-INFO-TESTS/50-TWO-ASTAR/info-run"> 1-INFO-TESTS/50-TWO-ASTAR/info-run </td>
+        </tr>
+        <div class="test-content" >
+        <tr id="content-27" class="collapsible">
+        <td colspan="5" class="code">
+
+
+        
+            <h2> Compiler info </h2>
+            <div display="inline" class="infocode">
+            
+                Algorithm: AStar<br>
+            
+                Prob Type: Two<br>
+            
+                <br>
+            
+                  0 1 2 3 <br>
+            
+                0 S . . . <br>
+            
+                1 . . . . <br>
+            
+                2 . . G . <br>
+            
+                3 . . . . <br>
+            
+                <br>
+            
+                2.8<br>
+            
+                NOTE:  The tests here only check the format of the output, not the correctness of the system. A simple java program parses the input and checks the last lines of your output. If something is incorrect, the program throws an Exception and the test fails. Please read carefully the output provided, and check Exception messages for information about test failures.<br>
+            
+                NOTE: Checks start from the last line backward.<br>
+            
+                TEST: Checking if the last line of the output is the path cost or -1.0 or 0.0<br>
+            
+                RESULT: PASS<br>
+            
+            </div>
+            <div class="infocode">
+            
+            </div>
+
+        
+        <br> <br>
+        </td>
+        </tr>
+        </div>
+    
+        <tr id="test28" 
+         bgcolor="#2aa77d" 
+        >
+        <td class="buttonholder">
+        <button class="collapsebutton" onclick="docollapse('content-28')">
+        expand
+        </button>
+        </td>
+        <td class="test_desc">
+         PASS 
+        </td>
+        <td class="test_desc" id="1-INFO-TESTS/51-TWO-BESTF/info-run"> 1-INFO-TESTS/51-TWO-BESTF/info-run </td>
+        </tr>
+        <div class="test-content" >
+        <tr id="content-28" class="collapsible">
+        <td colspan="5" class="code">
+
+
+        
+            <h2> Compiler info </h2>
+            <div display="inline" class="infocode">
+            
+                Algorithm: BestF<br>
+            
+                Prob Type: Two<br>
+            
+                <br>
+            
+                  0 1 2 3 4 5 <br>
+            
+                0 . S . . . . <br>
+            
+                1 . . . O . . <br>
+            
+                2 . . O O . . <br>
+            
+                3 . O O O . G <br>
+            
+                4 . . O O O . <br>
+            
+                5 . . . . O . <br>
+            
+                <br>
+            
+                5.2<br>
+            
+                NOTE:  The tests here only check the format of the output, not the correctness of the system. A simple java program parses the input and checks the last lines of your output. If something is incorrect, the program throws an Exception and the test fails. Please read carefully the output provided, and check Exception messages for information about test failures.<br>
+            
+                NOTE: Checks start from the last line backward.<br>
+            
+                TEST: Checking if the last line of the output is the path cost or -1.0 or 0.0<br>
+            
+                RESULT: PASS<br>
+            
+            </div>
+            <div class="infocode">
+            
+            </div>
+
+        
+        <br> <br>
+        </td>
+        </tr>
+        </div>
+    
+        <tr id="test29" 
+         bgcolor="#2aa77d" 
+        >
+        <td class="buttonholder">
+        <button class="collapsebutton" onclick="docollapse('content-29')">
+        expand
+        </button>
+        </td>
+        <td class="test_desc">
+         PASS 
+        </td>
+        <td class="test_desc" id="1-INFO-TESTS/53-TWO-ASTAR-VERBOSE/info-run"> 1-INFO-TESTS/53-TWO-ASTAR-VERBOSE/info-run </td>
+        </tr>
+        <div class="test-content" >
+        <tr id="content-29" class="collapsible">
+        <td colspan="5" class="code">
+
+
+        
+            <h2> Compiler info </h2>
+            <div display="inline" class="infocode">
+            
+                Algorithm: AStar<br>
+            
+                Prob Type: Two<br>
+            
+                <br>
+            
+                  0 1 2 3 <br>
+            
+                0 S . . . <br>
+            
+                1 . O O . <br>
+            
+                2 . O O . <br>
+            
+                3 . . . G <br>
+            
+                <br>
+            
+                [(0,0)4.2]<br>
+            
+                [(1,1)4.2, (1,2)4.7, (2,1)4.7]<br>
+            
+                [(1,2)4.7, (2,1)4.7, (1,2)4.7, (2,1)4.7]<br>
+            
+                [(2,1)4.7, (2,1)4.7, (1,2)4.7, (2,2)4.8]<br>
+            
+                [(1,2)4.7, (2,1)4.7, (2,2)4.8, (2,2)4.8]<br>
+            
+                [(2,1)4.7, (2,2)4.8, (2,2)4.8, (2,2)4.8]<br>
+            
+                [(2,2)4.8, (2,2)4.8, (2,2)4.8, (2,2)4.8]<br>
+            
+                [(2,2)4.8, (2,2)4.8, (2,2)4.8, (3,3)4.8]<br>
+            
+                [(2,2)4.8, (2,2)4.8, (3,3)4.8, (3,3)4.8]<br>
+            
+                [(2,2)4.8, (3,3)4.8, (3,3)4.8, (3,3)4.8]<br>
+            
+                [(3,3)4.8, (3,3)4.8, (3,3)4.8, (3,3)4.8]<br>
+            
+                6<br>
+            
+                (1,2)(2,1)(0,0)(1,1)(3,3)(2,2)<br>
+            
+                4.8<br>
+            
+                NOTE:  The tests here only check the format of the output, not the correctness of the system. A simple java program parses the input and checks the last lines of your output. If something is incorrect, the program throws an Exception and the test fails. Please read carefully the output provided, and check Exception messages for information about test failures.<br>
+            
+                NOTE: Checks start from the last line backward.<br>
+            
+                TEST: Checking if the last line of the output is the path cost or -1.0 or 0.0<br>
+            
+                RESULT: PASS<br>
+            
+                NOTE: Line last-2 should be a string representing a path of both agents, no test provided<br>
+            
+                TEST: Checking if the number of explored nodes is printed<br>
+            
+                RESULT: PASS<br>
+            
+                NOTE: Remember to print the frontier at each step, no test is provided for this<br>
+            
+            </div>
+            <div class="infocode">
+            
+            </div>
+
+        
+        <br> <br>
+        </td>
+        </tr>
+        </div>
+    
+        <tr id="test30" 
+         bgcolor="#2aa77d" 
+        >
+        <td class="buttonholder">
+        <button class="collapsebutton" onclick="docollapse('content-30')">
+        expand
+        </button>
+        </td>
+        <td class="test_desc">
+         PASS 
+        </td>
+        <td class="test_desc" id="1-INFO-TESTS/60-LINES-ASTAR/info-run"> 1-INFO-TESTS/60-LINES-ASTAR/info-run </td>
+        </tr>
+        <div class="test-content" >
+        <tr id="content-30" class="collapsible">
+        <td colspan="5" class="code">
+
+
+        
+            <h2> Compiler info </h2>
+            <div display="inline" class="infocode">
+            
+                Algorithm: AStar<br>
+            
+                Prob Type: Lines<br>
+            
+                <br>
+            
+                  0 1 2 3 <br>
+            
+                0 S . . . <br>
+            
+                1 . . . . <br>
+            
+                2 . . G . <br>
+            
+                3 . . . . <br>
+            
+                <br>
+            
+                2.8<br>
+            
+                NOTE:  The tests here only check the format of the output, not the correctness of the system. A simple java program parses the input and checks the last lines of your output. If something is incorrect, the program throws an Exception and the test fails. Please read carefully the output provided, and check Exception messages for information about test failures.<br>
+            
+                NOTE: Checks start from the last line backward.<br>
+            
+                TEST: Checking if the last line of the output is the path cost or -1.0 or 0.0<br>
+            
+                RESULT: PASS<br>
+            
+            </div>
+            <div class="infocode">
+            
+            </div>
+
+        
+        <br> <br>
+        </td>
+        </tr>
+        </div>
+    
+        <tr id="test31" 
+         bgcolor="#2aa77d" 
+        >
+        <td class="buttonholder">
+        <button class="collapsebutton" onclick="docollapse('content-31')">
+        expand
+        </button>
+        </td>
+        <td class="test_desc">
+         PASS 
+        </td>
+        <td class="test_desc" id="1-INFO-TESTS/61-LINES-BESTF/info-run"> 1-INFO-TESTS/61-LINES-BESTF/info-run </td>
+        </tr>
+        <div class="test-content" >
+        <tr id="content-31" class="collapsible">
+        <td colspan="5" class="code">
+
+
+        
+            <h2> Compiler info </h2>
+            <div display="inline" class="infocode">
+            
+                Algorithm: BestF<br>
+            
+                Prob Type: Lines<br>
+            
+                <br>
+            
+                  0 1 2 3 4 5 <br>
+            
+                0 . S . . . . <br>
+            
+                1 . . . O . . <br>
+            
+                2 . . O O . . <br>
+            
+                3 . O O O . G <br>
+            
+                4 . . O O O . <br>
+            
+                5 . . . . O . <br>
+            
+                <br>
+            
+                5.2<br>
+            
+                NOTE:  The tests here only check the format of the output, not the correctness of the system. A simple java program parses the input and checks the last lines of your output. If something is incorrect, the program throws an Exception and the test fails. Please read carefully the output provided, and check Exception messages for information about test failures.<br>
+            
+                NOTE: Checks start from the last line backward.<br>
+            
+                TEST: Checking if the last line of the output is the path cost or -1.0 or 0.0<br>
+            
+                RESULT: PASS<br>
+            
+            </div>
+            <div class="infocode">
+            
+            </div>
+
+        
+        <br> <br>
+        </td>
+        </tr>
+        </div>
+    
+        <tr id="test32" 
+         bgcolor="#2aa77d" 
+        >
+        <td class="buttonholder">
+        <button class="collapsebutton" onclick="docollapse('content-32')">
+        expand
+        </button>
+        </td>
+        <td class="test_desc">
+         PASS 
+        </td>
+        <td class="test_desc" id="1-INFO-TESTS/63-LINES-ASTAR-VERBOSE/info-run"> 1-INFO-TESTS/63-LINES-ASTAR-VERBOSE/info-run </td>
+        </tr>
+        <div class="test-content" >
+        <tr id="content-32" class="collapsible">
+        <td colspan="5" class="code">
+
+
+        
+            <h2> Compiler info </h2>
+            <div display="inline" class="infocode">
+            
+                Algorithm: AStar<br>
+            
+                Prob Type: Lines<br>
+            
+                <br>
+            
+                  0 1 2 3 <br>
+            
+                0 S . . . <br>
+            
+                1 . O O . <br>
+            
+                2 . O O . <br>
+            
+                3 . . . G <br>
+            
+                <br>
+            
+                [(0,0)4.2]<br>
+            
+                [(1,1)4.2, (2,1)4.7, (1,2)4.7]<br>
+            
+                [(2,1)4.7, (1,2)4.7, (2,1)4.7, (1,2)4.7]<br>
+            
+                [(1,2)4.7, (1,2)4.7, (2,1)4.7, (2,2)4.8]<br>
+            
+                [(2,1)4.7, (1,2)4.7, (2,2)4.8, (2,2)4.8]<br>
+            
+                [(1,2)4.7, (2,2)4.8, (2,2)4.8, (2,2)4.8]<br>
+            
+                [(2,2)4.8, (2,2)4.8, (2,2)4.8, (2,2)4.8]<br>
+            
+                [(2,2)4.8, (2,2)4.8, (2,2)4.8, (3,3)4.8]<br>
+            
+                [(2,2)4.8, (2,2)4.8, (3,3)4.8, (3,3)4.8]<br>
+            
+                [(2,2)4.8, (3,3)4.8, (3,3)4.8, (3,3)4.8]<br>
+            
+                [(3,3)4.8, (3,3)4.8, (3,3)4.8, (3,3)4.8]<br>
+            
+                6<br>
+            
+                (1,2)(2,1)(0,0)(1,1)(3,3)(2,2)<br>
+            
+                4.8<br>
+            
+                NOTE:  The tests here only check the format of the output, not the correctness of the system. A simple java program parses the input and checks the last lines of your output. If something is incorrect, the program throws an Exception and the test fails. Please read carefully the output provided, and check Exception messages for information about test failures.<br>
+            
+                NOTE: Checks start from the last line backward.<br>
+            
+                TEST: Checking if the last line of the output is the path cost or -1.0 or 0.0<br>
+            
+                RESULT: PASS<br>
+            
+                TEST: Checking if the path is printed<br>
+            
+                RESULT: PASS<br>
+            
+                TEST: Checking if the number of explored nodes is printed<br>
+            
+                RESULT: PASS<br>
+            
+                NOTE: Remember to print the frontier at each step, no test is provided for this<br>
+            
+            </div>
+            <div class="infocode">
+            
+            </div>
+
+        
+        <br> <br>
+        </td>
+        </tr>
+        </div>
+    
+    </table>
+    
+</body>
+<script>
+    function docollapse(contentid) {
+        var content = document.getElementById(contentid);
+        console.log(content + " banana");
+        if (content.style.display == "table-row"){
+            content.style.display = "none";
+        } else {
+            content.style.display = content.style.display = "table-row";
+        }
+    }
+</script>
+</html>
