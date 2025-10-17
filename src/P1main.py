@@ -73,7 +73,7 @@ def runSearch(probType: str, algo: str, size: int, start: Coord, goal: Coord, ob
         return res
     elif algo == "Alt":
         from Alt import Alt
-        res, _ = Alt(size, start, goal, obs, verbose).search()
+        res, _, _ = Alt(size, start, goal, obs, verbose).search()
         return res
 
 

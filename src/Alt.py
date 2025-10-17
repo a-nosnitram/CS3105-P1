@@ -17,6 +17,7 @@ class Alt():
         self.frontier = PriorityQueue()
         self._counter = itertools.count()
         self.alt = None # best alternative path cost
+        self.max_depth = 0  # Track maximum recursion depth
 
     def heuristic(self, coord):
         # euclidean distance
@@ -31,15 +32,19 @@ class Alt():
         self.frontier.put(
             (start_node.total_cost, next(self._counter), start_node))
 
-        result_cost, nodes_cnt, _ = self.recursive_helper(start_node, float('inf'), 0)
+        self.max_depth = 0  # Reset max depth
+        result_cost, nodes_cnt, _ = self.recursive_helper(start_node, float('inf'), 0, 0)
 
         # If no path found and verbose, print node count
         if result_cost is None and self.verbose:
             print(nodes_cnt)
 
-        return result_cost, nodes_cnt
+        return result_cost, nodes_cnt, self.max_depth
 
-    def recursive_helper(self, node, f_limit, nodes_explored):
+    def recursive_helper(self, node, f_limit, nodes_explored, depth):
+        # Track maximum depth reached
+        self.max_depth = max(self.max_depth, depth)
+
         # first base case: goal reached
         nodes_explored += 1
 
@@ -78,8 +83,8 @@ class Alt():
             # Get second-best f-value
             f_second = successors[1].total_cost if len(successors) > 1 else float('inf')
 
-            # Recurse with new f-limit = min(f_limit, f_second)
-            result_cost, node_cnt, new_f = self.recursive_helper(best, min(f_limit, f_second), nodes_explored)
+            # Recurse with new f-limit = min(f_limit, f_second), incrementing depth
+            result_cost, node_cnt, new_f = self.recursive_helper(best, min(f_limit, f_second), nodes_explored, depth + 1)
 
             if result_cost is not None:
                 return result_cost, node_cnt, new_f

@@ -90,6 +90,7 @@ def run_test_category(test_files, category_name, x_labels):
         'AStar_nodes': [],
         'BestF_nodes': [],
         'Alt_nodes': [],
+        'Alt_depth': [],  # Track actual RBFS depth
         'labels': x_labels
     }
 
@@ -167,21 +168,24 @@ def run_test_category(test_files, category_name, x_labels):
         from Alt import Alt
         start_time = time.time()
         alt = Alt(size, start, goal, obs, verbose=False)
-        alt_cost, alt_nodes = alt.search()
+        alt_cost, alt_nodes, alt_depth = alt.search()
         alt_time = time.time() - start_time
 
         results['Alt_cost'].append(
             alt_cost if alt_cost is not None else 0)
         results['Alt_nodes'].append(alt_nodes)
+        results['Alt_depth'].append(alt_depth)
 
         if alt_cost is not None:
             print(f"     Path Found!")
             print(f"     - Path Cost: {alt_cost:.2f} (Alt)")
             print(f"     - Nodes Explored: {alt_nodes}")
+            print(f"     - Max Depth: {alt_depth}")
             print(f"     - Time: {alt_time:.4f}s")
         else:
             print(f"     No Path Found (Alt)")
             print(f"     - Nodes Explored: {alt_nodes}")
+            print(f"     - Max Depth: {alt_depth}")
             print(f"     - Time: {alt_time:.4f}s")
 
         # Comparison
@@ -434,8 +438,8 @@ def create_summary_plot(output_dir, all_results):
 
 def create_all_tests_plot(output_dir, all_results):
     """Create a comprehensive plot showing results for all 25 tests"""
-    fig = plt.figure(figsize=(20, 10))
-    gs = fig.add_gridspec(2, 2, hspace=0.3, wspace=0.25)
+    fig = plt.figure(figsize=(20, 15))
+    gs = fig.add_gridspec(3, 1, hspace=0.3, wspace=0.25)
     # fig.suptitle('Performance Over 25 Tests Across 5 Categories',
     #              fontsize=20, fontweight='bold', y=0.98)
 
@@ -447,6 +451,7 @@ def create_all_tests_plot(output_dir, all_results):
     all_astar_nodes = []
     all_bestf_nodes = []
     all_alt_nodes = []
+    all_alt_depth = []
     category_boundaries = [0]
 
     for cat_name, results in all_results:
@@ -471,6 +476,7 @@ def create_all_tests_plot(output_dir, all_results):
             all_astar_nodes.append(results['AStar_nodes'][i])
             all_bestf_nodes.append(results['BestF_nodes'][i])
             all_alt_nodes.append(results['Alt_nodes'][i])
+            all_alt_depth.append(results['Alt_depth'][i])
         category_boundaries.append(len(all_labels))
 
     x = np.arange(len(all_labels))
@@ -539,6 +545,44 @@ def create_all_tests_plot(output_dir, all_results):
     ax2.legend(fontsize=12)
     ax2.grid(True, alpha=0.3, which='both', linestyle=':')
 
+    # Plot 3: Memory Usage Comparison
+    ax3 = fig.add_subplot(gs[2, :])
+
+    # Memory usage:
+    # A* and Best-First: O(nodes explored) - store all explored nodes + frontier
+    # RBFS: O(depth) - only stores current path (actual measured depth)
+    all_astar_memory = [n for n in all_astar_nodes]
+    all_bestf_memory = [n for n in all_bestf_nodes]
+    all_alt_memory = [max(1, d) for d in all_alt_depth]  # Use actual measured depth
+
+    ax3.plot(x, all_astar_memory, 'o-', label='A* (O(b^d))',
+             color='#F28235', linewidth=2, markersize=6, alpha=0.8)
+    ax3.plot(x, all_bestf_memory, 's-', label='Best-First (O(b^d))',
+             color='#9ECF34', linewidth=2, markersize=6, alpha=0.8)
+    ax3.plot(x, all_alt_memory, '^-', label='Alt/RBFS (O(bd)) - Actual Depth',
+             color='#4BA3F2', linewidth=2, markersize=6, alpha=0.8)
+
+    # Add vertical lines to separate categories
+    for boundary in category_boundaries[1:-1]:
+        ax3.axvline(x=boundary-0.5, color='gray',
+                    linestyle='--', linewidth=1, alpha=0.5)
+
+    for i, (cat_name, _) in enumerate(all_results):
+        mid_point = (category_boundaries[i] + category_boundaries[i+1]) / 2
+        ax3.text(mid_point-0.5, ax3.get_ylim()[1] * 0.95, cat_name,
+                 ha='center', va='top', fontsize=10, fontweight='bold',
+                 bbox=dict(boxstyle='round', facecolor='lightblue', alpha=0.3))
+
+    # ax3.set_xlabel('Test', fontsize=13)
+    ax3.set_ylabel('Memory Usage (nodes stored, log scale)', fontsize=13)
+    ax3.set_title('Figure 3: Memory Usage Across All 25 Tests (Log Scale)',
+                  fontsize=14, fontweight='bold')
+    ax3.set_xticks(x)
+    ax3.set_xticklabels(all_labels, fontsize=8, rotation=45, ha='right')
+    ax3.set_yscale('log')  # Use logarithmic scale for better visibility
+    ax3.legend(fontsize=12)
+    ax3.grid(True, alpha=0.3, which='both', linestyle=':')
+
     # Add coloured background to each section
     for i in range(len(category_boundaries)-1):
         start = category_boundaries[i]
@@ -546,6 +590,7 @@ def create_all_tests_plot(output_dir, all_results):
         color = '#f0f8ff' if i % 2 == 0 else '#faebd7'
         ax1.axvspan(start-0.5, end+0.5, color=color, alpha=0.3)
         ax2.axvspan(start-0.5, end+0.5, color=color, alpha=0.3)
+        ax3.axvspan(start-0.5, end+0.5, color=color, alpha=0.3)
 
     plt.savefig(f"{output_dir}/00_all_tests_detailed.png",
                 dpi=300, bbox_inches='tight')
