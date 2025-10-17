@@ -41,12 +41,12 @@ class Alt():
 
     def recursive_helper(self, node, f_limit, nodes_explored):
         # first base case: goal reached
+        nodes_explored += 1
+
         if node.coord == self.state_space.goal:
             if self.verbose:
                 print(nodes_explored)
             return node.cost, nodes_explored, node.total_cost
-
-        nodes_explored += 1
 
         # Get neighbors
         neighbors = self.state_space.get_neighbors(node)
