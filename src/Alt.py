@@ -74,6 +74,11 @@ class Alt():
 
             f_value, best = successors[0].total_cost, successors[0]
 
+            # if best successor has infinite cost, no path exists
+            if f_value == float('inf'):
+                explored.remove(coord_key)
+                return None, len(explored)
+
             if f_value > f_limit:
                 explored.remove(coord_key)
                 return None, len(explored) # fail
