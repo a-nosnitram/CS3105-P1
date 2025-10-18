@@ -39,10 +39,8 @@ class AStar():
 
             # queue items are (total_cost, counter, node)
             current_node = self.frontier.get()[2]
-            # print("exploring" + str(current_node.coord))
             explored.add((current_node.coord.x, current_node.coord.y))
             if current_node.coord == self.state_space.goal:
-                # 1.0 cost between adjacent coordinates and √2 for diagonals
                 if self.verbose:
                     print(len(explored))
                     print("".join([str(coord)
@@ -72,5 +70,4 @@ class AStar():
             step += 1
         if self.verbose:
             print(len(explored))
-            # print("".join([str(coord) for coord in explored]).replace(" ", ""))
-        return None, len(explored)  # no path found :((((
+        return None, len(explored)  # no path found :(

@@ -1,11 +1,11 @@
-# Evaluation script for A* and Best-First Search
+# Evaluation script for A*, RBFS, and Best-First Search
 # Metrics:
 # 1. Solution quality (path cost)
 # 2. Efficiency (number of nodes explored)
 #
 # Test categories:
 # - eval1-5: Grid size variation (10, 15, 20, 25, 30)
-# - eval6-10: Obstacle count variation (0, 1, 3, 6, 12)
+# - eval6-10: Obstacle count variation (0, 1, 3, 6, 10)
 # - eval11-15: Polygon vertex count variation (3, 4, 5, 6, 7)
 # - eval16-20: Shape rigidity variation (rectangles to organic blobs)
 # - eval21-25: Non-navigable pixel density variation (~1% to ~42%)
@@ -18,24 +18,15 @@ import matplotlib.pyplot as plt
 import numpy as np
 from coord import Coord
 
-# Add parent directory to path so we can import from src
-
-# Using the same printMap function from P1main.py
-
-
+# using the same printMap function from P1main.py
 def printMap(start, goal, size, obs, add=None):
-    """Print visual representation of the grid (from P1main.py)
-    Legend: '.' = free, 'O' = obstacle, 'S' = start, 'G' = goal, '*' = path/explored
-    """
     if add is None:
         add = set()
 
     block = set()
-    # collect the obstacles
     for o in obs:
         block.update(o.area)
     print()
-    # print map
     print('  ', end='')
     for x in range(0, size):
         print(x % 10, end=" ")
@@ -45,7 +36,6 @@ def printMap(start, goal, size, obs, add=None):
         for x in range(0, size):
             ch = '.'
             test = Coord(x, y)
-            # decide what element to print on this cell
             if (test in block):
                 ch = 'O'
             if (test in add):
@@ -59,8 +49,8 @@ def printMap(start, goal, size, obs, add=None):
     print()
 
 
+# load problem from file and return components
 def load_problem(filename):
-    """Load problem from file and return components"""
     with open(filename) as f:
         lines = f.readlines()
 
@@ -81,16 +71,16 @@ def load_problem(filename):
     return size, start, goal, obs
 
 
+# run tests and collect results for a category
 def run_test_category(test_files, category_name, x_labels):
-    """Run tests and collect results for a category"""
     results = {
-        'AStar_cost': [],
+        'alg_cost': [],
         'BestF_cost': [],
         'Alt_cost': [],
         'AStar_nodes': [],
         'BestF_nodes': [],
         'Alt_nodes': [],
-        'Alt_depth': [],  # Track actual RBFS depth
+        'Alt_depth': [], 
         'labels': x_labels
     }
 
@@ -106,7 +96,7 @@ def run_test_category(test_files, category_name, x_labels):
 
         size, start, goal, obs = load_problem(test_file)
 
-        # Print problem details
+        # print problem details
         num_obstacles = len(obs)
         total_pixels = size * size
         obstacle_pixels = sum(len(o.area) for o in obs)
@@ -121,21 +111,21 @@ def run_test_category(test_files, category_name, x_labels):
         print(f"     Legend: S=Start, G=Goal, O=Obstacle, .=Free")
         printMap(start, goal, size, obs)
 
-    # Run A*
+    # A*
         from AStar import AStar
         import time
         start_time = time.time()
         astar = AStar(size, start, goal, obs, verbose=False)
-        astar_cost, astar_nodes = astar.search()
+        alg_cost, astar_nodes = astar.search()
         astar_time = time.time() - start_time
 
-        results['AStar_cost'].append(
-            astar_cost if astar_cost is not None else 0)
+        results['alg_cost'].append(
+            alg_cost if alg_cost is not None else 0)
         results['AStar_nodes'].append(astar_nodes)
 
-        if astar_cost is not None:
+        if alg_cost is not None:
             print(f"     Path Found :)")
-            print(f"     - Path Cost: {astar_cost:.2f}")
+            print(f"     - Path Cost: {alg_cost:.2f}")
             print(f"     - Nodes Explored: {astar_nodes}")
             print(f"     - Time: {astar_time:.4f}s")
         else:
@@ -143,7 +133,7 @@ def run_test_category(test_files, category_name, x_labels):
             print(f"     - Nodes Explored: {astar_nodes}")
             print(f"     - Time: {astar_time:.4f}s")
 
-    # Run BestF
+    # BestF
         from BestF import BestF
         start_time = time.time()
         bestf = BestF(size, start, goal, obs, verbose=False)
@@ -164,7 +154,7 @@ def run_test_category(test_files, category_name, x_labels):
             print(f"     - Nodes Explored: {bestf_nodes}")
             print(f"     - Time: {bestf_time:.4f}s")
 
-        # Run Alt (RBFS)
+        # Alt (RBFS)
         from Alt import Alt
         start_time = time.time()
         alt = Alt(size, start, goal, obs, verbose=False)
@@ -188,7 +178,7 @@ def run_test_category(test_files, category_name, x_labels):
             print(f"     - Max Depth: {alt_depth}")
             print(f"     - Time: {alt_time:.4f}s")
 
-        # Comparison
+        # comparison
         print(f"\nComparison:")
         times = {
             'A*': astar_time,
@@ -204,12 +194,11 @@ def run_test_category(test_files, category_name, x_labels):
                 if name != fastest_name:
                     print(f"       · {name}: {t/fastest_time:.2f}x slower")
 
-    return results
+    return results    
 
-
+# comparison plots for a test category with multiple visualisation types
 def plot_comparison(results, category_name, x_label, filename):
-    """Create comparison plots for a test category with multiple visualization types"""
-    # Create a 2x2 grid of plots
+    # a 2x2 grid of plots
     fig = plt.figure(figsize=(16, 12))
     gs = fig.add_gridspec(3, 2, hspace=0.3, wspace=0.3)
     fig.suptitle(f'{category_name} - Algorithm Comparison',
@@ -218,9 +207,9 @@ def plot_comparison(results, category_name, x_label, filename):
     x = np.arange(len(results['labels']))
     width = 0.25
 
-    # Plot 1: Path Cost - Bar Chart
+    # 1: Path Cost - Bar Chart
     ax1 = fig.add_subplot(gs[0, 0])
-    ax1.bar(x - width, results['AStar_cost'],
+    ax1.bar(x - width, results['alg_cost'],
             width, label='A*', color='#F28235', alpha=0.8)
     ax1.bar(x, results['BestF_cost'], width,
             label='Best-First', color='#9ECF34', alpha=0.8)
@@ -235,7 +224,7 @@ def plot_comparison(results, category_name, x_label, filename):
     ax1.legend()
     ax1.grid(axis='y', alpha=0.3)
 
-    # Plot 2: Nodes Explored - Bar Chart
+    # 2: Nodes Explored - Bar Chart
     ax2 = fig.add_subplot(gs[0, 1])
     ax2.bar(x - width, results['AStar_nodes'],
             width, label='A*', color='#F28235', alpha=0.8)
@@ -248,7 +237,7 @@ def plot_comparison(results, category_name, x_label, filename):
     ax2.set_title('Efficiency - Bar Chart (Log Scale)', fontsize=12, fontweight='bold')
     ax2.set_xticks(x)
     ax2.set_xticklabels(results['labels'], rotation=15, ha='right')
-    ax2.set_yscale('log')  # Use logarithmic scale for better visibility
+    ax2.set_yscale('log')
     ax2.legend()
     ax2.grid(axis='y', alpha=0.3, which='both', linestyle=':')
 
@@ -263,13 +252,13 @@ def main():
     eval_dir = os.path.join(script_dir, "eval_tests")
     output_dir = os.path.join(script_dir, "results")
 
-    # Create output directory
+    # output directory
     os.makedirs(output_dir, exist_ok=True)
 
-    # Store all results for overall comparison
+    # all results for overall comparison
     all_results = []
 
-    # Category 1: Grid Size Variation (eval1-5)
+    # 1: Grid Size Variation (eval1-5)
     print("\n=== Category 1: Grid Size Variation ===")
     test_files = [f"{eval_dir}/eval{i}_grid_size.txt" for i in range(1, 6)]
     labels = ['10x10', '15x15', '20x20', '25x25', '30x30']
@@ -278,17 +267,17 @@ def main():
                     "Grid Size", f"{output_dir}/01_grid_size.png")
     all_results.append(('Grid Size', results1))
 
-    # Category 2: Obstacle Count Variation (eval6-10)
+    # 2: Obstacle Count Variation (eval6-10)
     print("\n=== Category 2: Obstacle Count Variation ===")
     test_files = [f"{eval_dir}/eval{i}_obs_num.txt" for i in range(6, 11)]
-    labels = ['0', '1', '3', '6', '12']
+    labels = ['0', '1', '3', '6', '10']
     results2 = run_test_category(
         test_files, "Obstacle Count Variation", labels)
     plot_comparison(results2, "Obstacle Count Variation",
                     "Number of Obstacles", f"{output_dir}/02_obstacle_count.png")
     all_results.append(('Obstacle Count', results2))
 
-    # Category 3: Vertex Count Variation (eval11-15)
+    # 3: Vertex Count Variation (eval11-15)
     print("\n=== Category 3: Polygon Vertex Count ===")
     test_files = [f"{eval_dir}/eval{i}_edge_num.txt" for i in range(11, 16)]
     labels = ['3', '4', '5', '6', '7']
@@ -297,7 +286,7 @@ def main():
                     "Vertices per Polygon", f"{output_dir}/03_vertex_count.png")
     all_results.append(('Vertex Count', results3))
 
-    # Category 4: Shape Rigidity (eval16-20)
+    # 4: Shape Rigidity (eval16-20)
     print("\n=== Category 4: Shape Rigidity ===")
     test_files = [f"{eval_dir}/eval{i}_shape.txt" for i in range(16, 21)]
     labels = ['Rectangle', 'Pentagon', 'Hexagon', 'Irregular', 'Organic']
@@ -306,7 +295,7 @@ def main():
                     f"{output_dir}/04_shape_rigidity.png")
     all_results.append(('Shape Rigidity', results4))
 
-    # Category 5: Obstacle Density (eval21-25)
+    # 5: Obstacle Density (eval21-25)
     print("\n=== Category 5: Obstacle Density ===")
     test_files = [f"{eval_dir}/eval{i}_ratio.txt" for i in range(21, 26)]
     labels = ['~1%', '~5%', '~13%', '~25%', '~42%']
@@ -315,19 +304,19 @@ def main():
                     f"{output_dir}/05_obstacle_density.png")
     all_results.append(('Obstacle Density', results5))
 
-    # Generate overall summary plots as well
+    # overall summary plots as well
     create_summary_plot(output_dir, all_results)
 
 
 def create_summary_plot(output_dir, all_results):
     """Create comprehensive summary plots showing overall performance across all tests"""
 
-    # Calculate aggregate statistics
+    # aggregate statistics
     categories = []
-    avg_astar_cost = []
+    avg_alg_cost = []
     avg_bestf_cost = []
     avg_alt_cost = []
-    std_astar_cost = []
+    std_alg_cost = []
     std_bestf_cost = []
     std_alt_cost = []
     avg_astar_nodes = []
@@ -336,50 +325,35 @@ def create_summary_plot(output_dir, all_results):
     std_astar_nodes = []
     std_bestf_nodes = []
     std_alt_nodes = []
-    total_astar_cost = []
-    total_bestf_cost = []
-    total_alt_cost = []
-    total_astar_nodes = []
-    total_bestf_nodes = []
-    total_alt_nodes = []
 
     for cat_name, results in all_results:
         categories.append(cat_name)
-        # Means
-        avg_astar_cost.append(np.mean(results['AStar_cost']))
+        # calculating means
+        avg_alg_cost.append(np.mean(results['alg_cost']))
         avg_bestf_cost.append(np.mean(results['BestF_cost']))
         avg_alt_cost.append(np.mean(results['Alt_cost']))
         avg_astar_nodes.append(np.mean(results['AStar_nodes']))
         avg_bestf_nodes.append(np.mean(results['BestF_nodes']))
         avg_alt_nodes.append(np.mean(results['Alt_nodes']))
-        # Standard deviations (error bars)
-        std_astar_cost.append(np.std(results['AStar_cost']))
+        # standard deviations (for error bars)
+        std_alg_cost.append(np.std(results['alg_cost']))
         std_bestf_cost.append(np.std(results['BestF_cost']))
         std_alt_cost.append(np.std(results['Alt_cost']))
         std_astar_nodes.append(np.std(results['AStar_nodes']))
         std_bestf_nodes.append(np.std(results['BestF_nodes']))
         std_alt_nodes.append(np.std(results['Alt_nodes']))
-        # Totals
-        total_astar_cost.append(np.sum(results['AStar_cost']))
-        total_bestf_cost.append(np.sum(results['BestF_cost']))
-        total_alt_cost.append(np.sum(results['Alt_cost']))
-        total_astar_nodes.append(np.sum(results['AStar_nodes']))
-        total_bestf_nodes.append(np.sum(results['BestF_nodes']))
-        total_alt_nodes.append(np.sum(results['Alt_nodes']))
 
-    # Create overall comparison figure
+    # overall comparison figure
     fig = plt.figure(figsize=(18, 12))
     gs = fig.add_gridspec(2, 2, hspace=0.35, wspace=0.35)
-    # fig.suptitle('Overall Performance Comparison: A* vs Best-First Search (All 25 Tests)',
-    #  fontsize=20, fontweight='bold', y=0.98)
 
     x = np.arange(len(categories))
     width = 0.35
 
-    # Plot 1: Average Path Cost by Category
+    # 1: Average Path Cost by Category
     ax1 = fig.add_subplot(gs[0, 0])
-    ax1.bar(x - width, avg_astar_cost, width,
-        yerr=std_astar_cost, capsize=5,
+    ax1.bar(x - width, avg_alg_cost, width,
+        yerr=std_alg_cost, capsize=5,
         label='A*', color='#F28235', alpha=0.8, ecolor='#9a9a9a')
     ax1.bar(x, avg_bestf_cost, width,
         yerr=std_bestf_cost, capsize=5,
@@ -395,7 +369,7 @@ def create_summary_plot(output_dir, all_results):
     ax1.legend()
     ax1.grid(axis='y', alpha=0.3)
 
-    # Plot 2: Average Nodes Explored by Category
+    # 2: Average Nodes Explored by Category
     ax2 = fig.add_subplot(gs[0, 1])
     ax2.bar(x - width, avg_astar_nodes, width,
         yerr=std_astar_nodes, capsize=5,
@@ -415,37 +389,22 @@ def create_summary_plot(output_dir, all_results):
     ax2.legend()
     ax2.grid(axis='y', alpha=0.3, which='both', linestyle=':')
 
-    # Plot 3: Pie Chart - Total Nodes Explored
-    # ax3 = fig.add_subplot(gs[1, :])
-    # total_all_astar = sum(total_astar_nodes)
-    # total_all_bestf = sum(total_bestf_nodes)
-    # total_all_alt = sum(total_alt_nodes)
-    # ax3.pie([total_all_astar, total_all_bestf, total_all_alt], labels=['A*', 'Best-First', 'Alt (RBFS)'],
-    #         colors=['#F28235', '#9ECF34', '#4BA3F2'], autopct='%1.1f%%', startangle=90,
-    #         textprops={'fontsize': 12, 'fontweight': 'bold'})
-    # ax3.set_title(
-    #     f'Figure 5: Total Nodes Explored\nAcross All Tests\n(Total: {total_all_astar + total_all_bestf + total_all_alt:,})',
-    #     fontsize=12, fontweight='bold')
-
     plt.savefig(f"{output_dir}/00_overall_summary.png",
                 dpi=300, bbox_inches='tight')
     print(f"Saved plot: {output_dir}/00_overall_summary.png")
     plt.close()
 
-    # Create a second summary with line charts showing all tests
+    # second summary with line charts showing all tests
     create_all_tests_plot(output_dir, all_results)
 
 
+# comprehensive plot showing results for all 25 tests
 def create_all_tests_plot(output_dir, all_results):
-    """Create a comprehensive plot showing results for all 25 tests"""
     fig = plt.figure(figsize=(20, 15))
     gs = fig.add_gridspec(3, 1, hspace=0.3, wspace=0.25)
-    # fig.suptitle('Performance Over 25 Tests Across 5 Categories',
-    #              fontsize=20, fontweight='bold', y=0.98)
 
-    # Flatten all results and build descriptive labels
     all_labels = []
-    all_astar_cost = []
+    all_alg_cost = []
     all_bestf_cost = []
     all_alt_cost = []
     all_astar_nodes = []
@@ -456,7 +415,7 @@ def create_all_tests_plot(output_dir, all_results):
 
     for cat_name, results in all_results:
         for i, label in enumerate(results['labels']):
-            # Build a more descriptive label for each test
+            # descriptive label for each test
             if cat_name == 'Grid Size':
                 test_label = f"{label}"
             elif cat_name == 'Obstacle Count':
@@ -470,7 +429,7 @@ def create_all_tests_plot(output_dir, all_results):
             else:
                 test_label = f"{cat_name}: {label}"
             all_labels.append(test_label)
-            all_astar_cost.append(results['AStar_cost'][i])
+            all_alg_cost.append(results['alg_cost'][i])
             all_bestf_cost.append(results['BestF_cost'][i])
             all_alt_cost.append(results['Alt_cost'][i])
             all_astar_nodes.append(results['AStar_nodes'][i])
@@ -481,32 +440,31 @@ def create_all_tests_plot(output_dir, all_results):
 
     x = np.arange(len(all_labels))
 
-    # Plot 1: All Path Costs
+    # 1: All Path Costs
     ax1 = fig.add_subplot(gs[0, :])
-    # Plot Best-First first (background)
+    # Best-First first (background)
     ax1.plot(x, all_bestf_cost, 's-', label='Best-First',
              color='#9ECF34', linewidth=2.5, markersize=7, alpha=0.85)
-    # Plot A* with hollow markers
-    ax1.plot(x, all_astar_cost, 'o-', label='A*',
+    # A* with hollow markers
+    ax1.plot(x, all_alg_cost, 'o-', label='A*',
              color='#F28235', linewidth=2.5, markersize=9, alpha=0.9,
              markerfacecolor='none', markeredgewidth=2)
-    # Plot Alt with different marker
+    # Alt with different marker
     ax1.plot(x, all_alt_cost, 'D-', label='Alt (RBFS)',
              color='#4BA3F2', linewidth=2, markersize=6, alpha=0.9)
 
-    # Add vertical lines to separate categories
+    # vertical lines to separate categories
     for boundary in category_boundaries[1:-1]:
         ax1.axvline(x=boundary-0.5, color='gray',
                     linestyle='--', linewidth=1, alpha=0.5)
 
-    # Add category labels
+    # category labels
     for i, (cat_name, _) in enumerate(all_results):
         mid_point = (category_boundaries[i] + category_boundaries[i+1]) / 2
         ax1.text(mid_point-0.5, ax1.get_ylim()[1] * 0.95, cat_name,
                  ha='center', va='top', fontsize=10, fontweight='bold',
                  bbox=dict(boxstyle='round', facecolor='lightblue', alpha=0.3))
 
-    # ax1.set_xlabel('Test', fontsize=13)
     ax1.set_ylabel('Path Cost', fontsize=13)
     ax1.set_title('Figure 1: Solution Quality Across All 25 Tests',
                   fontsize=14, fontweight='bold')
@@ -515,7 +473,7 @@ def create_all_tests_plot(output_dir, all_results):
     ax1.legend(fontsize=12)
     ax1.grid(True, alpha=0.3)
 
-    # Plot 2: All Nodes Explored
+    # 2: All Nodes Explored
     ax2 = fig.add_subplot(gs[1, :])
     ax2.plot(x, all_astar_nodes, 'o-', label='A*',
              color='#F28235', linewidth=2, markersize=6, alpha=0.8)
@@ -524,7 +482,7 @@ def create_all_tests_plot(output_dir, all_results):
     ax2.plot(x, all_alt_nodes, '^-', label='Alt (RBFS)',
              color='#4BA3F2', linewidth=2, markersize=6, alpha=0.8)
 
-    # Add vertical lines to separate categories
+    # vertical lines to separate categories
     for boundary in category_boundaries[1:-1]:
         ax2.axvline(x=boundary-0.5, color='gray',
                     linestyle='--', linewidth=1, alpha=0.5)
@@ -535,34 +493,33 @@ def create_all_tests_plot(output_dir, all_results):
                  ha='center', va='top', fontsize=10, fontweight='bold',
                  bbox=dict(boxstyle='round', facecolor='lightblue', alpha=0.3))
 
-    # ax2.set_xlabel('Test', fontsize=13)
     ax2.set_ylabel('Nodes Explored (log scale)', fontsize=13)
     ax2.set_title('Figure 2: Nodes Explored Across All 25 Tests (Log Scale)',
                   fontsize=14, fontweight='bold')
     ax2.set_xticks(x)
     ax2.set_xticklabels(all_labels, fontsize=8, rotation=45, ha='right')
-    ax2.set_yscale('log')  # Use logarithmic scale for better visibility
+    ax2.set_yscale('log')  # logarithmic scale for visibility
     ax2.legend(fontsize=12)
     ax2.grid(True, alpha=0.3, which='both', linestyle=':')
 
-    # Plot 3: Memory Usage Comparison
+    # 3: Memory Usage Comparison
     ax3 = fig.add_subplot(gs[2, :])
 
     # Memory usage:
     # A* and Best-First: O(nodes explored) - store all explored nodes + frontier
-    # RBFS: O(depth) - only stores current path (actual measured depth)
+    # RBFS: O(depth) - only stores current path (measured depth)
     all_astar_memory = [n for n in all_astar_nodes]
     all_bestf_memory = [n for n in all_bestf_nodes]
-    all_alt_memory = [max(1, d) for d in all_alt_depth]  # Use actual measured depth
+    all_alt_memory = [max(1, d) for d in all_alt_depth]  
 
     ax3.plot(x, all_astar_memory, 'o-', label='A* (O(b^d))',
              color='#F28235', linewidth=2, markersize=6, alpha=0.8)
     ax3.plot(x, all_bestf_memory, 's-', label='Best-First (O(b^d))',
              color='#9ECF34', linewidth=2, markersize=6, alpha=0.8)
-    ax3.plot(x, all_alt_memory, '^-', label='Alt/RBFS (O(bd)) - Actual Depth',
+    ax3.plot(x, all_alt_memory, '^-', label='Alt (RBFS) (O(bd))',
              color='#4BA3F2', linewidth=2, markersize=6, alpha=0.8)
 
-    # Add vertical lines to separate categories
+    # vertical lines to separate categories
     for boundary in category_boundaries[1:-1]:
         ax3.axvline(x=boundary-0.5, color='gray',
                     linestyle='--', linewidth=1, alpha=0.5)
@@ -573,17 +530,16 @@ def create_all_tests_plot(output_dir, all_results):
                  ha='center', va='top', fontsize=10, fontweight='bold',
                  bbox=dict(boxstyle='round', facecolor='lightblue', alpha=0.3))
 
-    # ax3.set_xlabel('Test', fontsize=13)
     ax3.set_ylabel('Memory Usage (nodes stored, log scale)', fontsize=13)
     ax3.set_title('Figure 3: Memory Usage Across All 25 Tests (Log Scale)',
                   fontsize=14, fontweight='bold')
     ax3.set_xticks(x)
     ax3.set_xticklabels(all_labels, fontsize=8, rotation=45, ha='right')
-    ax3.set_yscale('log')  # Use logarithmic scale for better visibility
+    ax3.set_yscale('log')  # logarithmic scale for better visibility
     ax3.legend(fontsize=12)
     ax3.grid(True, alpha=0.3, which='both', linestyle=':')
 
-    # Add coloured background to each section
+    # coloured background to each section
     for i in range(len(category_boundaries)-1):
         start = category_boundaries[i]
         end = category_boundaries[i+1]-1

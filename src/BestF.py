@@ -51,7 +51,6 @@ class BestF():
             neighbors = self.state_space.get_neighbors(current_node)
             for neighbor in neighbors:
                 neighbor_node = Node(neighbor, current_node)
-                # Calculate cost: 1.0 for adjacent, √2 for diagonal
                 line = DrawLine(current_node.coord, neighbor)
                 distance = line.length
                 neighbor_node.cost = current_node.cost + distance

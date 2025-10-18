@@ -17,7 +17,7 @@ class Alt():
         self.frontier = PriorityQueue()
         self._counter = itertools.count()
         self.alt = None # best alternative path cost
-        self.max_depth = 0  # Track maximum recursion depth
+        self.max_depth = 0  # maximum recursion depth for memory estimate
 
     def heuristic(self, coord):
         # euclidean distance
@@ -32,17 +32,15 @@ class Alt():
         self.frontier.put(
             (start_node.total_cost, next(self._counter), start_node))
 
-        self.max_depth = 0  # Reset max depth
+        self.max_depth = 0 
         result_cost, nodes_cnt, _ = self.recursive_helper(start_node, float('inf'), 0, 0)
 
-        # If no path found and verbose, print node count
         if result_cost is None and self.verbose:
             print(nodes_cnt)
 
         return result_cost, nodes_cnt, self.max_depth
 
     def recursive_helper(self, node, f_limit, nodes_explored, depth):
-        # Track maximum depth reached
         self.max_depth = max(self.max_depth, depth)
 
         # first base case: goal reached
@@ -53,7 +51,7 @@ class Alt():
                 print(nodes_explored)
             return node.cost, nodes_explored, node.total_cost
 
-        # Get neighbors
+        # check for neighbors
         neighbors = self.state_space.get_neighbors(node)
         if not neighbors:
             return None, nodes_explored, float('inf')  # fail, return infinite f-value
@@ -69,7 +67,7 @@ class Alt():
                 print(str([str(n.coord) + "{:.1f}".format(n.total_cost)
                       for n in successors]).replace("'", ""))
 
-            # Get best and second-best f-values
+            # get best and second-best f-values
             best = successors[0]
             f_best = best.total_cost
 
@@ -78,19 +76,19 @@ class Alt():
                 return None, nodes_explored, float('inf')
 
             if f_best > f_limit:
-                return None, nodes_explored, f_best  # return the best f-value we found
+                return None, nodes_explored, f_best  # return the best f-value 
 
-            # Get second-best f-value
+            # get second-best f-value
             f_second = successors[1].total_cost if len(successors) > 1 else float('inf')
 
-            # Recurse with new f-limit = min(f_limit, f_second), incrementing depth
+            # recurse (backtrack) with new f-limit = min(f_limit, f_second), incrementing depth
             result_cost, node_cnt, new_f = self.recursive_helper(best, min(f_limit, f_second), nodes_explored, depth + 1)
 
             if result_cost is not None:
                 return result_cost, node_cnt, new_f
 
-            # Update the f-value of the failed path and re-sort
-            best.total_cost = max(new_f, f_best)  # Use max to ensure monotonicity
+            # update the f-value of the failed path and re-sort
+            best.total_cost = max(new_f, f_best)  
             successors.sort(key=lambda x: x.total_cost)
             nodes_explored = node_cnt
 
@@ -107,7 +105,7 @@ class Alt():
         for neighbor in neighbors:
             neighbor_node = Node(neighbor, node)
             self.calculate_f_value(node, neighbor_node)
-            # Only add if not in current path (check parent chain for cycles)
+            # only add node if not in current path (check parent chain for cycles)
             if not self.in_path(neighbor, node):
                 successors.append(neighbor_node)
 
@@ -115,8 +113,8 @@ class Alt():
         successors.sort(key=lambda x: x.total_cost)
         return successors
 
+    # check if coord is in the path from start to current node
     def in_path(self, coord, node):
-        """Check if coord is in the path from start to current node"""
         current = node
         while current is not None:
             if current.coord == coord:
